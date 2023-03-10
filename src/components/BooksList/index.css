@@ -1,0 +1,32 @@
+.books-header {
+  background-color: rgb(19, 197, 138);
+  height: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.search-heading {
+  margin-top: 7px;
+  color: white;
+}
+
+.books-search-input {
+  width: 30%;
+  padding: 7px;
+  border-width: 0px;
+  border-radius: 5px;
+}
+
+.books-empty-container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.books-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30px;
+}

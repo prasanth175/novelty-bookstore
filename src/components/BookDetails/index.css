@@ -1,0 +1,100 @@
+.book-details {
+  display: flex;
+  justify-content: center;
+}
+
+.book-details-container {
+  display: flex;
+  margin: 50px;
+  width: 70vw;
+}
+
+.book-details-image {
+  height: 100%;
+  width: 500px;
+}
+
+.book-details-content {
+  margin-left: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.book-details-list {
+  padding-left: 30px;
+}
+
+.book-details-item {
+  list-style-type: circle;
+}
+
+.details-text {
+  font-family: 'Roboto';
+  font-weight: 500;
+}
+
+.details-value {
+  font-weight: 450;
+  color: rgb(108, 104, 104);
+}
+
+.details-printed-price {
+  text-decoration: line-through;
+  padding-left: 10px;
+  font-size: 25px;
+}
+
+.details-bidding-container {
+  text-align: center;
+  margin-top: 50px;
+  width: 100%;
+  align-self: center;
+  margin-bottom: 30px;
+}
+
+.details-bidding-heading {
+  border-bottom: 1px solid rgb(243, 234, 234);
+  padding-bottom: 20px;
+}
+
+.details-bidding-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 4px 8px 16px 0px #7ec6cf;
+  padding: 30px;
+}
+
+.details-bidding-input {
+  border-radius: 5px;
+  padding: 8px;
+  border: 1px solid rgb(212, 208, 208);
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.details-bidding-input:focus {
+  outline: 2px solid rgb(127, 217, 239);
+}
+
+.details-bidding-label {
+  font-weight: 410;
+  font-family: 'Roboto';
+  font-size: 14px;
+  color: grey;
+}
+
+.submitted-bid-form {
+  border-width: 0px;
+  box-shadow: 4px 8px 16px 0px #7ec6cf;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.edit-bid-btn {
+  background-color: yellow;
+  padding: 8px 15px;
+  border-radius: 5px;
+}

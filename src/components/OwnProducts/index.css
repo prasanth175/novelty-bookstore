@@ -1,0 +1,27 @@
+.empty-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.empty-heading {
+  font-size: 50px;
+  font-family: 'Roboto';
+  font-weight: bold;
+}
+
+.own-products-heading {
+  font-size: 30px;
+  font-family: 'Bree Serif';
+  text-align: center;
+}
+
+.own-products-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.own-products-list {
+}

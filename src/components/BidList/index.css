@@ -1,0 +1,61 @@
+/* .bid-details-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+}
+
+/* .bid-count-btn {
+  border: 1px solid black;
+
+  width: 20%;
+}
+
+.bid-user {
+  border: 1px solid black;
+
+  width: 20%;
+}
+
+.bidding-amount {
+  border: 1px solid black;
+  width: 20%;
+}
+
+.bidding-options-btn {
+  width: 40%;
+} */
+
+td {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.bid-accept-btn {
+  background-color: green;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 3px;
+  margin-right: 20px;
+}
+.bid-decline-btn {
+  background-color: red;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 3px;
+}
+
+.bid-count-btn {
+  font-weight: 450;
+  font-family: 'Roboto';
+}
+
+.bidding-options-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.accepted-number {
+  margin-right: 20px;
+}

@@ -1,0 +1,32 @@
+.own-book-item {
+  display: flex;
+  background-color: #ffffff;
+  box-shadow: 4px 8px 16px 0px #bfbfbf;
+  width: 50vw;
+}
+
+.own-book-image {
+  height: 300px;
+  width: 150px;
+}
+
+.view-btn-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.own-book-content {
+  margin-left: 30px;
+  width: 100%;
+  margin: 20px;
+}
+
+.view-btn {
+  border: 1px solid blue;
+  color: blue;
+  padding: 7px 15px;
+  border-radius: 5px;
+  font-weight: 500;
+  font-family: 'Roboto';
+}

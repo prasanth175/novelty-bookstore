@@ -1,0 +1,121 @@
+/* Write your CSS code here */
+.register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+.login-container {
+  display: flex;
+  border-radius: 10px;
+  justify-content: space-around;
+  background-color: transparent;
+  width: 80vw;
+}
+
+.login-image {
+  width: 500px;
+  height: 300px;
+  align-self: center;
+  margin-right: 30px;
+}
+
+.login-input {
+  width: 100%;
+  padding: 10px;
+  border-width: 0px;
+  border-radius: 5px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  color: black;
+  font-weight: 400;
+  background-color: #ecf6fb;
+}
+
+.login-form-field {
+  width: 350px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 16px 0px #e0dfdf;
+  padding: 40px;
+  border-radius: 5px;
+}
+
+.input-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgb(144, 140, 140);
+}
+
+/* .register-icon {
+  font-size: 25px;
+  margin-top: 5px;
+  color: rgb(44, 42, 42);
+  margin-right: 10px;
+} */
+
+.login-btn {
+  color: white;
+  background-color: rgb(57, 57, 241);
+  border-radius: 10px;
+  padding: 10px 25px;
+  font-weight: 500;
+  font-family: 'Bree Serif';
+  font-size: 15px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.register-heading {
+  font-size: 40px;
+  margin-bottom: 30px;
+  font-family: 'Bree Serif';
+  text-align: center;
+  margin-top: 0px;
+  color: rgb(43, 52, 236);
+}
+
+.register-error-msg {
+  margin-top: 3px;
+  color: red;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.login-top-heading {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .login-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .login-image {
+    width: 320px;
+    height: 200px;
+  }
+
+  .login-form-field {
+    box-shadow: none;
+  }
+  s .login-form-field {
+    padding: 0px;
+  }
+
+  .register-heading {
+    display: none;
+  }
+
+  .login-top-heading {
+    font-size: 40px;
+    margin-bottom: 40px;
+    font-family: 'Bree Serif';
+    text-align: center;
+    margin-top: 0px;
+    display: block;
+    color: rgb(43, 52, 236);
+  }
+}

@@ -1,0 +1,60 @@
+.carousel-container {
+  height: 500px;
+  font-family: 'Roboto';
+  background-color: rgb(241, 239, 239);
+}
+
+.carousel-item {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}
+
+.slick-track {
+  display: flex;
+  align-items: center;
+}
+
+.carousel-content {
+  align-items: center;
+  margin-right: 30px;
+  width: 40%;
+}
+
+.web-title {
+  color: green;
+  font-size: 15px;
+  font-weight: 420;
+}
+
+.carousel-heading {
+  font-size: 50px;
+}
+
+.poet {
+  text-align: right;
+  font-family: 'Bree Serif';
+}
+
+.read-more-btn {
+  background-color: green;
+  color: white;
+  border-radius: 5px;
+  padding: 8px 15px;
+}
+
+.slick-next {
+  color: black !important;
+  border: 1px solid black;
+  z-index: -2 !important;
+  display: inline-block !important;
+  display: none !important;
+}
+
+.slick-prev {
+  color: black !important;
+  border: 1px solid black;
+  z-index: -2 !important;
+  display: none !important;
+}

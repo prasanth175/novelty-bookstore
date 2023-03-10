@@ -1,0 +1,20 @@
+.books-item {
+  text-align: center;
+  background-color: #ffffff;
+  box-shadow: 4px 8px 16px 0px #bfbfbf;
+  padding: 20px;
+  border-radius: 10px;
+  margin-right: 20px;
+  width: 350px;
+  height: 400px;
+}
+
+.books-img {
+  height: 250px;
+  width: 150px;
+}
+
+.book-item-link {
+  text-decoration: none;
+  color: rgb(19, 148, 105);
+}
