@@ -1,6 +1,8 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {v4 as uuidv4} from 'uuid'
+import {AiFillLinkedin, AiFillInstagram} from 'react-icons/ai'
+
 import './index.css'
 import Header from '../Header'
 
@@ -33,16 +35,20 @@ const categoryList = [
 
 const languagesList = [
   {
-    languageId: uuidv4(),
+    languageId: 'English',
     languageTxt: 'English',
   },
   {
-    languageId: uuidv4(),
+    languageId: 'Telugu',
     languageTxt: 'Telugu',
   },
   {
-    languageId: uuidv4(),
+    languageId: 'Hindi',
     languageTxt: 'Hindi',
+  },
+  {
+    languageId: 'Other',
+    languageTxt: 'Other',
   },
 ]
 
@@ -58,6 +64,11 @@ class SellBook extends Component {
     printedPrice: '',
     sellingPrice: '',
     file: null,
+    fieldsErrorStatus: false,
+    fieldsErrorTxt: '',
+    showMsgStatus: false,
+    showMsgTxt: '',
+    isSuccess: false,
   }
 
   onCategory = event => {
@@ -94,7 +105,33 @@ class SellBook extends Component {
 
   submitSellForm = event => {
     event.preventDefault()
-    this.sendSellBookDetails()
+    const {
+      title,
+      author,
+      description,
+      publication,
+      isbn,
+      printedPrice,
+      sellingPrice,
+      file,
+    } = this.state
+    if (
+      title === '' ||
+      author === '' ||
+      description === '' ||
+      publication === '' ||
+      isbn === '' ||
+      printedPrice === '' ||
+      sellingPrice === '' ||
+      file === ''
+    ) {
+      this.setState({
+        fieldsErrorStatus: true,
+        fieldsErrorTxt: 'All fields are Required*',
+      })
+    } else {
+      this.setState({fieldsErrorStatus: false}, this.sendSellBookDetails)
+    }
   }
 
   sendSellBookDetails = async () => {
@@ -110,9 +147,8 @@ class SellBook extends Component {
       sellingPrice,
       file,
     } = this.state
-
+    const bookId = uuidv4()
     const getToken = Cookies.get('jwt_token')
-
     const sellDetails = {
       category: categoryActiveId,
       language: languageActiveId,
@@ -124,6 +160,7 @@ class SellBook extends Component {
       printed_price: printedPrice,
       selling_price: sellingPrice,
       file,
+      bookId,
     }
     const sellUrl = 'http://localhost:3006/sell/'
     const options = {
@@ -139,6 +176,19 @@ class SellBook extends Component {
     const data = await response.json()
     console.log(response)
     console.log(data)
+    if (data.status === 200) {
+      this.setState({
+        showMsgStatus: true,
+        showMsgTxt: data.message,
+        isSuccess: true,
+      })
+    } else {
+      this.setState({
+        showMsgStatus: true,
+        showMsgTxt: data.message,
+        isSuccess: false,
+      })
+    }
   }
 
   render() {
@@ -153,12 +203,17 @@ class SellBook extends Component {
       printedPrice,
       sellingPrice,
       file,
+      fieldsErrorStatus,
+      fieldsErrorTxt,
+      showMsgStatus,
+      showMsgTxt,
+      isSuccess,
     } = this.state
 
     return (
       <>
         <Header />
-        <div className="sell-book-container">
+        <div className="sell-book-container main-section">
           <div className="sell-book-inner-container">
             <h1 className="add-book-heading">Add a Book</h1>
             <form className="sell-book-form" onSubmit={this.submitSellForm}>
@@ -267,7 +322,9 @@ class SellBook extends Component {
                 onChange={this.onSellingPrice}
               />
 
-              <label htmlFor="fileInput">Product Image</label>
+              <label htmlFor="fileInput" className="sell-label">
+                Product Image
+              </label>
               <input id="fileInput" type="file" onChange={this.onFile} />
               <div className="sell-btn-container">
                 <button type="submit" className="sell-submit-btn">
@@ -277,7 +334,47 @@ class SellBook extends Component {
                   Clear
                 </button>
               </div>
+              {fieldsErrorStatus && (
+                <p className="sell-error-txt">{fieldsErrorTxt}</p>
+              )}
+              {showMsgStatus && (
+                <div className={isSuccess ? 'success-txt' : 'failure-txt'}>
+                  <p className="msg-txt">{showMsgTxt}</p>
+                </div>
+              )}
             </form>
+          </div>
+        </div>
+        <div>
+          <div className="about-us-main-container">
+            <div className="about-us-container">
+              <div className="about-us-left">
+                <h1>About Us</h1>
+                <p>
+                  Ever wanted to buy a book but could not because it was too
+                  expensive? worry not! because Novelty Bookstore is here! The
+                  Novelty Bookstore.
+                </p>
+                <div className="about-us-icons-container">
+                  <AiFillLinkedin className="about-us-icon" />
+                  <AiFillInstagram className="about-us-icon" />
+                </div>
+              </div>
+              <div className="about-us-right">
+                <h1>My Account</h1>
+                <ul>
+                  <li className="about-us-link">View Cart</li>
+                  <li className="about-us-link">Categories</li>
+                  <li className="about-us-link">Products</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="footer">
+            <p className="footer-txt">
+              © 2023 All Rights Reserved By Novelty Bookstore
+            </p>
           </div>
         </div>
       </>

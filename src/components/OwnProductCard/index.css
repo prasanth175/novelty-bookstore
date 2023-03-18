@@ -1,13 +1,27 @@
+.own-book-list-item {
+  padding: 20px;
+  box-shadow: 4px 8px 10px 0px #dae3e0;
+  width: 50vw;
+  margin-bottom: 50px;
+  border-radius: 5px;
+}
+
 .own-book-item {
   display: flex;
   background-color: #ffffff;
-  box-shadow: 4px 8px 16px 0px #bfbfbf;
-  width: 50vw;
+  border-top: 1px solid rgb(200, 199, 199);
+  border-bottom: 1px solid rgb(200, 199, 199);
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .own-book-image {
-  height: 300px;
-  width: 150px;
+  height: 250px;
+  width: 180px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border: 1px solid rgb(200, 199, 199);
+  padding: 5px;
 }
 
 .view-btn-price {
@@ -29,4 +43,27 @@
   border-radius: 5px;
   font-weight: 500;
   font-family: 'Roboto';
+}
+
+.view-btn:hover {
+  box-shadow: 4px 8px 10px 0px #6c8ce5;
+  padding: 10px 20px;
+}
+
+.own-product-selling-price {
+  font-weight: bold;
+  font-family: 'Roboto';
+  font-size: 16px;
+}
+
+.own-product-desc {
+  color: grey;
+  font-family: 'Roboto';
+  font-weight: 450;
+  font-size: 15px;
+}
+
+.own-product-title {
+  color: rgb(9, 17, 86);
+  font-family: 'Franklin Gothic Medium';
 }

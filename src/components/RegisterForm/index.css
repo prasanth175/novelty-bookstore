@@ -26,15 +26,44 @@
   align-items: flex-start;
 }
 
+.register-input-item {
+  margin-bottom: 20px;
+}
+
 .register-input {
   width: 100%;
   padding: 10px;
   border-width: 0px;
   border-radius: 3px;
-  margin-bottom: 20px;
   color: black;
   font-weight: 400;
   background-color: #ecf6fb;
+}
+
+.otp-container {
+  display: flex;
+  width: 90%;
+  align-self: flex-end;
+  border-radius: 5px;
+  align-items: center;
+}
+
+.otp-input {
+  margin-bottom: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  width: 100%;
+}
+
+.otp-btn {
+  background-color: rgb(24, 24, 136);
+  color: white;
+  font-family: 'Roboto';
+  font-weight: 450;
+  width: 35%;
+  padding: 10px 3px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .register-form-field {
@@ -67,8 +96,9 @@
   font-family: 'Bree Serif';
 }
 
-.register-from {
-  margin-bottom: 30px;
+.register-form {
+  display: flex;
+  flex-direction: column;
 }
 
 .register-error-msg {
@@ -82,7 +112,31 @@
   display: none;
 }
 
+.already-logged-txt {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.log-here-txt {
+  font-weight: 450;
+}
+
+.blur-msg {
+  text-align: left;
+  margin-left: 33px;
+}
+
 @media (max-width: 1101px) {
+  .otp-btn {
+    width: 28%;
+    padding: 10px 3px;
+  }
+
+  .otp-container {
+    width: 92%;
+  }
+
   .register-container {
     flex-direction: column;
     align-items: center;

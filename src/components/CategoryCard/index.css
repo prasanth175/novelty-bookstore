@@ -14,15 +14,20 @@
 }
 
 .category-item {
-  width: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 40px;
+  cursor: pointer;
 }
 
 .category-txt {
   font-family: 'Roboto';
   font-weight: 430;
   color: grey;
+}
+
+.category-link {
+  text-decoration: none;
+  width: 30%;
 }

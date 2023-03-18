@@ -10,29 +10,199 @@ class RegisterForm extends Component {
   state = {
     username: '',
     email: '',
-    mobile: '',
     password: '',
+    confirmPassword: '',
     isError: false,
     errorMsg: '',
+    isSend: false,
+    otp: '',
+    otpStatus: false,
+    otpVerificationStatus: false,
+    otpTxt: '',
+    emailErrorStatus: false,
+    emailErrorMsg: '',
+    passwordErrorStatus: false,
+    passwordErrorMsg: '',
+    confirmPasswordErrorStatus: false,
+    confirmPasswordErrorMsg: '',
+    validEmail: false,
+    validPassword: false,
+    validConfirmPassword: false,
+    usernameErrorMsg: '',
+    usernameErrorStatus: false,
   }
+
+  sendOtp = () => this.setState({isSend: true}, this.generateOTP)
+
+  verifyOtp = () => this.setState({isSend: false}, this.verifyOTP)
+
+  generateOTP = async () => {
+    const {email} = this.state
+    console.log(email)
+    const otpUrl = 'http://localhost:3006/generate-otp'
+    try {
+      const response = await fetch(otpUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({email}),
+      })
+      const data = await response.json()
+      console.log(data.message)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  verifyOTP = async () => {
+    const {email, otp} = this.state
+    const verifyData = {email, otp}
+    const otpUrl = 'http://localhost:3006/verify-otp'
+
+    try {
+      const response = await fetch(otpUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(verifyData),
+      })
+      const data = await response.json()
+      console.log(data.message)
+      if (data.status === 200) {
+        this.setState({
+          otpVerificationStatus: true,
+          otpStatus: true,
+          otpTxt: data.message,
+        })
+      } else {
+        this.setState({otpStatus: true, otpTxt: data.message})
+      }
+    } catch (err) {
+      console.log(err)
+      this.setState({otpStatus: true, otpTxt: err})
+    }
+  }
+
+  onOtp = event => this.setState({otp: event.target.value})
 
   onInput = event => this.setState({username: event.target.value})
 
   onMail = event => this.setState({email: event.target.value})
 
-  onMobile = event => this.setState({mobile: event.target.value})
-
   onPassword = event => this.setState({password: event.target.value})
+
+  onConfirmPassword = event =>
+    this.setState({confirmPassword: event.target.value})
+
+  onUserBlur = () => this.setState({usernameErrorStatus: false})
+
+  onEmailBlur = event => {
+    if (!event.target.value.includes('@gmail.com')) {
+      this.setState({emailErrorMsg: 'Invalid Email', emailErrorStatus: true})
+    } else {
+      this.setState({
+        emailErrorMsg: '',
+        emailErrorStatus: false,
+        validEmail: true,
+        otpVerificationStatus: false,
+      })
+    }
+  }
+
+  onPasswordBlur = event => {
+    if (event.target.value.length < 8) {
+      this.setState({
+        passwordErrorMsg: 'Password must have 8 characters',
+        passwordErrorStatus: true,
+      })
+    } else {
+      this.setState({
+        passwordErrorMsg: '',
+        passwordErrorStatus: false,
+        validPassword: true,
+      })
+    }
+  }
+
+  onConfirmPasswordBlur = event => {
+    const {password} = this.state
+    if (event.target.value !== password) {
+      this.setState({
+        confirmPasswordErrorMsg: 'Password do not match',
+        confirmPasswordErrorStatus: true,
+      })
+    } else {
+      this.setState({
+        confirmPasswordErrorMsg: '',
+        confirmPasswordErrorStatus: false,
+        validConfirmPassword: true,
+      })
+    }
+  }
+
+  performValidations = () => {
+    const {
+      validConfirmPassword,
+      validEmail,
+      validPassword,
+      otpVerificationStatus,
+      password,
+      confirmPassword,
+      email,
+      username,
+    } = this.state
+
+    // console.log(validConfirmPassword)
+    // console.log(validEmail)
+    // console.log(validPassword)
+    // console.log(otpVerificationStatus)
+
+    if (
+      validConfirmPassword &&
+      validEmail &&
+      validPassword &&
+      otpVerificationStatus
+    ) {
+      this.getRegisterDetails()
+    } else {
+      if (password === '') {
+        this.setState({
+          passwordErrorMsg: 'Required*',
+          passwordErrorStatus: true,
+        })
+      }
+      if (confirmPassword === '') {
+        this.setState({
+          confirmPasswordErrorMsg: 'Required*',
+          confirmPasswordErrorStatus: true,
+        })
+      }
+      if (username === '') {
+        this.setState({
+          usernameErrorMsg: 'Required*',
+          usernameErrorStatus: true,
+        })
+      }
+      if (email === '') {
+        this.setState({
+          emailErrorMsg: 'Required*',
+          emailErrorStatus: true,
+        })
+      }
+    }
+  }
 
   submitForm = event => {
     event.preventDefault()
-    this.getRegisterDetails()
+    this.performValidations()
   }
 
   getRegisterDetails = async () => {
     const {history} = this.props
-    const {username, email, mobile, password} = this.state
-    const registerDetails = {username, email, mobile, password}
+    const {username, email, password} = this.state
+    const registerDetails = {username, email, password}
     const url = 'http://localhost:3006/register/'
     const options = {
       headers: {
@@ -58,7 +228,28 @@ class RegisterForm extends Component {
     if (getToken !== undefined) {
       return <Redirect to="/login" />
     }
-    const {username, email, mobile, password, isError, errorMsg} = this.state
+    const {
+      username,
+      email,
+      password,
+      confirmPassword,
+      isError,
+      errorMsg,
+      isSend,
+      otp,
+      otpStatus,
+      otpTxt,
+      emailErrorMsg,
+      emailErrorStatus,
+      passwordErrorMsg,
+      passwordErrorStatus,
+      confirmPasswordErrorMsg,
+      confirmPasswordErrorStatus,
+      usernameErrorMsg,
+      usernameErrorStatus,
+    } = this.state
+    console.log(isSend)
+
     return (
       <div className="register">
         <div className="register-container">
@@ -71,27 +262,41 @@ class RegisterForm extends Component {
           <div className="register-form-field">
             <h1 className="register-heading">Register With Us</h1>
             <form className="register-form" onSubmit={this.submitForm}>
-              <div className="register-input-field">
-                <BsPersonFill className="register-icon" />
-                <input
-                  placeholder="Username"
-                  className="register-input"
-                  onChange={this.onInput}
-                  value={username}
-                />
+              <div className="register-input-item">
+                <div className="register-input-field">
+                  <BsPersonFill className="register-icon" />
+                  <input
+                    placeholder="Username"
+                    className="register-input"
+                    onChange={this.onInput}
+                    value={username}
+                    onBlur={this.onUserBlur}
+                  />
+                </div>
+                {usernameErrorStatus && (
+                  <p className="register-error-msg blur-msg">
+                    {usernameErrorMsg}
+                  </p>
+                )}
               </div>
 
-              <div className="register-input-field">
-                <IoIosMail className="register-icon" />
-                <input
-                  placeholder="Email"
-                  className="register-input"
-                  onChange={this.onMail}
-                  value={email}
-                />
+              <div className="register-input-item">
+                <div className="register-input-field">
+                  <IoIosMail className="register-icon" />
+                  <input
+                    placeholder="Email"
+                    className="register-input"
+                    onChange={this.onMail}
+                    value={email}
+                    onBlur={this.onEmailBlur}
+                  />
+                </div>
+                {emailErrorStatus && (
+                  <p className="register-error-msg blur-msg">{emailErrorMsg}</p>
+                )}
               </div>
 
-              <div className="register-input-field">
+              {/* <div className="register-input-field">
                 <BsFillTelephoneFill className="register-icon" />
                 <input
                   placeholder="Mobile Number"
@@ -99,23 +304,75 @@ class RegisterForm extends Component {
                   onChange={this.onMobile}
                   value={mobile}
                 />
+              </div> */}
+
+              <div className="register-input-item">
+                <div className="register-input-field">
+                  <HiLockClosed className="register-icon" />
+                  <input
+                    placeholder="Password"
+                    className="register-input"
+                    type="password"
+                    onBlur={this.onPasswordBlur}
+                    value={password}
+                    onChange={this.onPassword}
+                  />
+                </div>
+                {passwordErrorStatus && (
+                  <p className="register-error-msg blur-msg">
+                    {passwordErrorMsg}
+                  </p>
+                )}
               </div>
 
-              <div className="register-input-field">
-                <HiLockClosed className="register-icon" />
-                <input placeholder="Password" className="register-input" />
+              <div className="register-input-item">
+                <div className="register-input-field">
+                  <HiKey className="register-icon" />
+                  <input
+                    placeholder="Repeat Password"
+                    className="register-input"
+                    onChange={this.onConfirmPassword}
+                    value={confirmPassword}
+                    type="password"
+                    onBlur={this.onConfirmPasswordBlur}
+                  />
+                </div>
+                {confirmPasswordErrorStatus && (
+                  <p className="register-error-msg blur-msg">
+                    {confirmPasswordErrorMsg}
+                  </p>
+                )}
               </div>
 
-              <div className="register-input-field">
-                <HiKey className="register-icon" />
+              <div className="otp-container">
                 <input
-                  placeholder="Repeat Password"
-                  className="register-input"
-                  onChange={this.onPassword}
-                  value={password}
+                  type="text"
+                  className="register-input otp-input"
+                  placeholder="Enter OTP"
+                  value={otp}
+                  onChange={this.onOtp}
                 />
+                {isSend ? (
+                  <button
+                    className="otp-btn"
+                    type="button"
+                    onClick={this.verifyOtp}
+                  >
+                    Verify
+                  </button>
+                ) : (
+                  <button
+                    className="otp-btn"
+                    type="button"
+                    onClick={this.sendOtp}
+                  >
+                    Send OTP
+                  </button>
+                )}
               </div>
-
+              {otpStatus && (
+                <p className="register-error-msg blur-msg">{otpTxt}</p>
+              )}
               <button
                 onClick={this.registerSubmitBtn}
                 type="submit"
@@ -125,10 +382,10 @@ class RegisterForm extends Component {
               </button>
               {isError && <p className="register-error-msg">{errorMsg}</p>}
             </form>
-            <p>
+            <p className="already-logged-txt">
               Have already an account?{' '}
               <Link to="/login">
-                <span>Login here</span>
+                <span className="log-here-txt">Login here</span>
               </Link>
             </p>
           </div>

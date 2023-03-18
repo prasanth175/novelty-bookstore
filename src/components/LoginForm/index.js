@@ -1,4 +1,4 @@
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import './index.css'
@@ -36,7 +36,6 @@ class LoginForm extends Component {
   getRegisterDetails = async () => {
     const {username, password} = this.state
     const loginDetails = {username, password}
-    console.log(loginDetails)
     const loginUrl = 'http://localhost:3006/login/'
     const options = {
       headers: {
@@ -50,7 +49,7 @@ class LoginForm extends Component {
 
     const data = await response.json()
     if (data.status_code === 400) {
-      this.setState({errorMsg: data.error_txt, isError: true})
+      this.setState({errorMsg: data.error_msg, isError: true})
     } else {
       this.onSuccessApi(data.jwtToken)
     }
@@ -92,11 +91,14 @@ class LoginForm extends Component {
               </label>
               <input
                 placeholder="Password"
-                className="login-input"
+                className="login-input login-password"
                 type="password"
                 onChange={this.onPassword}
                 id="passwordInput"
               />
+              <Link to="/password">
+                <p className="forgot-password-txt">Forgot Password ?</p>
+              </Link>
 
               <button
                 onClick={this.loginSubmitBtn}
@@ -105,8 +107,19 @@ class LoginForm extends Component {
               >
                 Login
               </button>
-              {isError && <p className="register-error-msg">{errorMsg}</p>}
+              {isError && (
+                <p className="register-error-msg blur-msg login-error">
+                  {errorMsg}
+                </p>
+              )}
             </form>
+
+            <p className="not-register-txt">
+              Not Registered yet?{' '}
+              <Link to="/register">
+                <span className="register-here-txt">Register Here!</span>
+              </Link>
+            </p>
           </div>
         </div>
       </div>

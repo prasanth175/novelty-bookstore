@@ -1,10 +1,28 @@
 import {Component} from 'react'
+import {AiFillLinkedin, AiFillInstagram} from 'react-icons/ai'
+
 import './index.css'
 import Header from '../Header'
 import BidList from '../BidList'
 
 class OwnProductDetails extends Component {
   state = {ownBookDetails: {}, bidList: []}
+
+  onDeleteOwnBook = async () => {
+    const {match} = this.props
+    const {params} = match
+    const {id} = params
+    console.log(id)
+
+    const delUrl = `http://localhost:3006/products/${id}`
+    const options = {
+      method: 'DELETE',
+    }
+    const response = await fetch(delUrl, options)
+    const data = await response.json()
+    const {history} = this.props
+    history.replace('/products')
+  }
 
   componentDidMount = async () => {
     this.getOwnBookDetails()
@@ -14,6 +32,7 @@ class OwnProductDetails extends Component {
     const {match} = this.props
     const {params} = match
     const {id} = params
+    console.log(id)
 
     const bookDetailsUrl = `http://localhost:3006/products/${id}`
     const response = await fetch(bookDetailsUrl)
@@ -74,7 +93,7 @@ class OwnProductDetails extends Component {
     } = ownBookDetails
 
     return (
-      <div className="book-details-container">
+      <div className="book-details-container main-section">
         <img src={file} alt={title} className="book-details-image" />
         <div className="book-details-content">
           <div>
@@ -82,7 +101,7 @@ class OwnProductDetails extends Component {
             <ul className="book-details-list">
               <li className="book-details-item">
                 <p className="details-text">
-                  Description:
+                  Description: <br />
                   <span className="details-value">{description}</span>
                 </p>
               </li>
@@ -119,17 +138,21 @@ class OwnProductDetails extends Component {
                 </p>
               </li>
             </ul>
-            <h1>
+            <h1 className="own-product-price-details">
               Rs. {sellingPrice}
               <span className="details-printed-price">{printedPrice}</span>
             </h1>
           </div>
 
           <div className="own-product-buttons">
-            <button className="edit-own-product-details-btn" type="button">
+            {/* <button className="edit-own-product-details-btn" type="button">
               Edit Product Details
-            </button>
-            <button className="delete-own-product-btn" type="button">
+            </button> */}
+            <button
+              onClick={this.onDeleteOwnBook}
+              className="delete-own-product-btn"
+              type="button"
+            >
               Delete Product
             </button>
           </div>
@@ -166,6 +189,43 @@ class OwnProductDetails extends Component {
       <>
         <Header />
         <div className="book-details">{this.renderOwnBookDetails()}</div>
+
+        <div className="related-products">
+          <h1>Related Products</h1>
+        </div>
+
+        <div>
+          <div className="about-us-main-container">
+            <div className="about-us-container">
+              <div className="about-us-left">
+                <h1>About Us</h1>
+                <p>
+                  Ever wanted to buy a book but could not because it was too
+                  expensive? worry not! because Novelty Bookstore is here! The
+                  Novelty Bookstore.
+                </p>
+                <div className="about-us-icons-container">
+                  <AiFillLinkedin className="about-us-icon" />
+                  <AiFillInstagram className="about-us-icon" />
+                </div>
+              </div>
+              <div className="about-us-right">
+                <h1>My Account</h1>
+                <ul>
+                  <li className="about-us-link">View Cart</li>
+                  <li className="about-us-link">Categories</li>
+                  <li className="about-us-link">Products</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="footer">
+            <p className="footer-txt">
+              © 2023 All Rights Reserved By Novelty Bookstore
+            </p>
+          </div>
+        </div>
       </>
     )
   }

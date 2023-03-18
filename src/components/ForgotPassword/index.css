@@ -1,0 +1,201 @@
+.forgot-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.forgot-form {
+  box-shadow: 4px 8px 16px 0px #bfbfbf;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 450px;
+  padding: 20px;
+  border-radius: 3px;
+}
+
+.forgot-heading {
+  color: blue;
+  font-family: 'Bree Serif';
+  font-size: 20px;
+}
+
+.forgot-txt {
+  color: rgb(56, 55, 55);
+  margin-bottom: 30px;
+  font-size: 14px;
+  font-family: 'Roboto';
+  margin-top: 20px;
+  font-weight: 430;
+}
+
+.forgot-input {
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  border: 0.1px solid rgb(204, 192, 255);
+}
+
+.forgot-input:focus {
+  border: 3px solid rgb(138, 199, 219);
+  box-shadow: 4px 8px 16px 0px rgb(214, 239, 248);
+}
+
+.forgot-label {
+  align-self: flex-start;
+  font-family: 'Roboto';
+  font-weight: 450;
+  font-size: 13px;
+  color: grey;
+  margin-bottom: 5px;
+}
+
+.forgot-continue-btn {
+  margin-top: 30px;
+  background-color: rgb(32, 32, 200);
+  width: 100%;
+  padding: 10px 10px;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+}
+
+.forgot-bottom-txt {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 15px;
+  color: grey;
+  margin-top: 30px;
+}
+
+.forgot-signup-txt {
+  color: blue;
+  font-weight: 450;
+}
+
+.forgot-otp-sent-txt {
+  font-size: 40px;
+  font-family: 'Roboto';
+  text-shadow: 2px 2px 4px rgba(79, 76, 100, 0.5);
+  font-weight: bold;
+  color: rgb(44, 25, 105);
+}
+
+.forgot-otp {
+  color: grey;
+  font-size: 15px;
+  font-weight: 450;
+  font-style: italic;
+}
+
+.forgot-otp-btns {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.forgot-otp-back {
+  background-color: rgb(78, 74, 74);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 10px;
+  font-family: 'Roboto';
+  font-size: 15px;
+}
+
+.forgot-otp-submit {
+  background-color: rgb(43, 207, 87);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 10px;
+  margin-left: 30px;
+  font-family: 'Roboto';
+  font-size: 15px;
+}
+
+.otp-result {
+  align-self: flex-start;
+  color: rgba(239, 13, 13, 0.759);
+  margin-left: 10px;
+  margin-top: 0px;
+  font-family: 'Roboto';
+  font-weight: 450;
+  font-size: 12px;
+}
+
+/*-----------------------------set Password---------------------*/
+
+.set-password-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.set-password {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 8px 16px 0px rgb(224, 250, 224);
+  width: 500px;
+  padding: 20px;
+}
+
+.set-password-heading {
+  color: green;
+  text-align: center;
+  font-family: 'Bree Serif';
+  font-size: 30px;
+  font-weight: 450;
+  margin-bottom: 30px;
+}
+
+.set-password-input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid rgb(185, 238, 182);
+}
+
+.set-password-label {
+  margin-top: 30px;
+  font-family: 'Roboto';
+  font-weight: 450;
+  font-size: 13px;
+  color: rgb(115, 110, 110);
+  margin-bottom: 5px;
+}
+
+.set-password-btn {
+  background-color: rgb(8, 129, 8);
+  color: white;
+  padding: 12px 15px;
+  border-radius: 5px;
+  margin-top: 50px;
+  font-size: 14px;
+  font-weight: 450;
+  font-family: 'Roboto';
+}
+
+.error-txt {
+  color: rgb(154, 17, 17);
+  font-size: 12px;
+  font-family: 'Roboto';
+  font-weight: 450;
+  margin-top: 3px;
+}
+
+.set-password-error-msg {
+  margin-top: 0px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.register-now-link {
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 450;
+  color: rgb(37, 37, 205);
+  cursor: pointer;
+  text-align: center;
+}

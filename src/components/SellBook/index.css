@@ -74,3 +74,32 @@
   border-radius: 5px;
   margin-left: 20px;
 }
+
+/*---------------error text---------*/
+
+.sell-error-txt {
+  color: red;
+  font-family: 'Roboto';
+  font-weight: 15px;
+  text-align: center;
+}
+
+.success-txt {
+  background-color: rgb(217, 250, 217);
+  border-radius: 3px;
+  padding: 20px;
+}
+
+.failure-txt {
+  background-color: rgb(248, 187, 187);
+  border-radius: 3px;
+  padding: 20px;
+}
+
+.msg-txt {
+  color: white;
+  font-family: 'Roboto';
+  font-weight: 450;
+  font-size: 15px;
+  text-align: center;
+}

@@ -98,3 +98,21 @@
   padding: 8px 15px;
   border-radius: 5px;
 }
+
+.related-products {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  border-top: 1px solid rgb(227, 225, 225);
+}
+
+.related-heading {
+  text-align: center;
+}
+
+.related-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80vw;
+}

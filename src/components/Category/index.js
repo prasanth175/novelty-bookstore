@@ -28,15 +28,20 @@ const categoriesList = [
   },
 ]
 
-const Category = () => (
-  <div id="categoryId" className="category-container">
-    <h1 className="category-heading">Books Categories</h1>
-    <ul className="category-list">
-      {categoriesList.map(each => (
-        <CategoryCard item={each} />
-      ))}
-    </ul>
-  </div>
-)
+const Category = () => {
+  const getCategoryId = id => {
+    console.log(id)
+  }
+  return (
+    <div id="categoryId" className="category-container">
+      <h1 className="category-heading">Books Categories</h1>
+      <ul className="category-list">
+        {categoriesList.map(each => (
+          <CategoryCard item={each} getCategoryId={getCategoryId} />
+        ))}
+      </ul>
+    </div>
+  )
+}
 
 export default Category

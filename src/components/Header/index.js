@@ -5,7 +5,7 @@ import Cookies from 'js-cookie'
 import './index.css'
 
 class Header extends Component {
-  state = {activeUsername: ''}
+  state = {activeUsername: '', cartItemCount: 0}
 
   onLogout = () => {
     const {history} = this.props
@@ -13,7 +13,7 @@ class Header extends Component {
     history.replace('/login')
   }
 
-  componentDidMount = async () => {
+  getUserName = async () => {
     const getToken = Cookies.get('jwt_token')
     console.log(getToken)
     const detailsUrl = 'http://localhost:3006/details/'
@@ -23,21 +23,43 @@ class Header extends Component {
       },
       method: 'GET',
     }
-
     const response = await fetch(detailsUrl, options)
     const data = await response.json()
     this.setState({activeUsername: data.name})
+  }
+
+  getCartCount = async () => {
+    const jwtToken = Cookies.get('jwt_token')
+    const url = 'http://localhost:3006/cart-details'
+    const options = {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+      method: 'GET',
+    }
+
+    const response = await fetch(url, options)
+    const data = await response.json()
+    console.log(data.response)
+    this.setState({cartItemCount: data.response.length})
+  }
+
+  componentDidMount = () => {
+    this.getUserName()
+    this.getCartCount()
   }
 
   renderProducts = event => {
     const {history} = this.props
     if (event.target.value === 'products') {
       history.replace('products')
+    } else if (event.target.value === 'Change Password') {
+      history.replace('/change-password')
     }
   }
 
   render() {
-    const {activeUsername} = this.state
+    const {activeUsername, cartItemCount} = this.state
 
     return (
       <nav className="nav-container">
@@ -47,9 +69,6 @@ class Header extends Component {
         <ul className="nav-items-list">
           <Link className="nav-link" to="/">
             <li className="nav-item">Home</li>
-          </Link>
-          <Link className="nav-link" to="/">
-            <li className="nav-item">Categories</li>
           </Link>
           <Link className="nav-link" to="/books">
             <li className="nav-item">Books</li>
@@ -68,14 +87,16 @@ class Header extends Component {
             value={activeUsername}
             onChange={this.renderProducts}
           >
-            <option>{activeUsername}</option>
+            <option>Hi, {activeUsername}</option>
             <option value="products">Your Products</option>
-            <option>Change Password</option>
+            <option value="Change Password">Change Password</option>
             <option>Contact Us</option>
             <option>About</option>
           </select>
-          <Link to="/register" className="nav-link">
-            <p className="cart-item">Cart</p>
+          <Link to="/cart" className="nav-link">
+            <p className="nav-cart">
+              <span className="cart-item-count">{cartItemCount}</span>Cart
+            </p>
           </Link>
           <button type="button" className="logout-btn" onClick={this.onLogout}>
             Logout

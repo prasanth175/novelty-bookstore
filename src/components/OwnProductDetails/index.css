@@ -37,28 +37,6 @@
   margin-top: 30px;
 }
 
-/* .bidding-headings {
-  display: flex;
-  justify-content: space-between;
-  border-top: 1px solid rgb(236, 232, 232);
-  border-bottom: 1px solid rgb(238, 233, 233);
-}
-
-.bidding-top-txt {
-  font-family: 'Roboto';
-  font-weight: 500;
-}
-
-.bidding-values-container {
-  margin-top: 0px;
-}
-
-
-.bidding-head-row {
-  display: flex;
-  justify-content: space-between;
-} */
-
 th {
   border-top: 1px solid rgb(236, 232, 232);
   border-bottom: 1px solid rgb(238, 233, 233);
@@ -73,7 +51,27 @@ th {
   font-size: 16px;
   color: rgb(83, 76, 76);
   width: 270%;
-  border: 1px solid black;
   display: flex;
   justify-content: center;
+}
+
+.book-details-heading {
+  font-family: 'sans-serif';
+}
+
+.details-text {
+  font-size: 15px;
+  font-family: 'Roboto';
+  font-weight: 500;
+}
+
+.details-value {
+  font-size: 12px;
+  font-family: 'Roboto';
+  font-weight: 450;
+  color: rgba(27, 29, 29, 0.67);
+}
+
+.own-product-price-details {
+  font-family: 'Calibri';
 }

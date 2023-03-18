@@ -17,23 +17,21 @@ const OwnProductCard = props => {
     bookId,
     file,
   } = item
-
-  console.log('own product card-----------------')
-  console.log(file)
-
   return (
-    <li className="own-book-item">
-      <img className="own-book-image" src={file} alt="own-book" />
-      <div className="own-book-content">
-        <h1>{title}</h1>
-        <p>{description}</p>
-        <div className="view-btn-price">
-          <Link to={`/products/${bookId}`}>
-            <button type="button" className="view-btn">
-              View Product
-            </button>
-          </Link>
-          <p>{sellingPrice}</p>
+    <li className="own-book-list-item">
+      <div className="own-book-item">
+        <img className="own-book-image" src={file} alt="own-book" />
+        <div className="own-book-content">
+          <h1 className="own-product-title">{title}</h1>
+          <p className="own-product-desc">{description}</p>
+          <div className="view-btn-price">
+            <Link to={`/products/${bookId}`}>
+              <button type="button" className="view-btn">
+                View Product
+              </button>
+            </Link>
+            <p className="own-product-selling-price">{sellingPrice}</p>
+          </div>
         </div>
       </div>
     </li>

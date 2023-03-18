@@ -1,9 +1,9 @@
 import './index.css'
 
 const NotFound = () => (
-  <div className="not-found-container">
+  <div className="not-found-container main-section">
     <img
-      src="https://assets.ccbp.in/frontend/react-js/not-found-blog-img.png"
+      src="https://www.aamtrading.com/assets/img/nproduct.png"
       alt="not found"
       className="not-found-img"
     />

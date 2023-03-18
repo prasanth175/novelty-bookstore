@@ -12,19 +12,26 @@ import OwnProducts from './components/OwnProducts'
 import BooksList from './components/BooksList'
 import BookDetails from './components/BookDetails'
 import OwnProductDetails from './components/OwnProductDetails'
-import About from './components/About'
-import Category from './components/Category'
+import Cart from './components/Cart'
+import Payment from './components/Payment'
+import ForgotPassword from './components/ForgotPassword'
+import ChangePassword from './components/ChangePassword'
+import NotFound from './components/NotFound'
 
 class App extends Component {
-  state = {activeUsername: ''}
+  state = {activeUsername: '', categoryId: ''}
 
   onUsername = name => this.setState({activeUsername: name})
 
+  getCategoryId = id => this.setState({categoryId: id})
+
   render() {
-    const {activeUsername} = this.state
-    console.log(activeUsername)
+    const {activeUsername, categoryId} = this.state
+    console.log('rendered')
     return (
-      <UserContext.Provider value={activeUsername}>
+      <UserContext.Provider
+        value={{activeUsername, categoryId, getCategory: this.getCategoryId}}
+      >
         <>
           <Switch>
             <Route exact path="/register" component={RegisterForm} />
@@ -34,8 +41,18 @@ class App extends Component {
               component={LoginForm}
               onUsername={this.onUsername}
             />
+            <Route exact path="/password" component={ForgotPassword} />
+
             <ProtectedRoute exact path="/" component={Home} />
+            <ProtectedRoute
+              exact
+              path="/change-password"
+              component={ChangePassword}
+            />
+
             <ProtectedRoute exact path="/sell" component={SellBook} />
+            <ProtectedRoute exact path="/cart" component={Cart} />
+            <ProtectedRoute exact path="/payments" component={Payment} />
             <ProtectedRoute exact path="/products" component={OwnProducts} />
             <ProtectedRoute exact path="/books/:id" component={BookDetails} />
             <ProtectedRoute exact path="/books" component={BooksList} />
@@ -44,6 +61,7 @@ class App extends Component {
               path="/products/:id"
               component={OwnProductDetails}
             />
+            <Route component={NotFound} />
           </Switch>
         </>
       </UserContext.Provider>

@@ -1,5 +1,5 @@
 .books-header {
-  background-color: rgb(19, 197, 138);
+  background-color: rgba(232, 236, 235, 0.677);
   height: 80px;
   display: flex;
   justify-content: space-around;
@@ -8,25 +8,88 @@
 
 .search-heading {
   margin-top: 7px;
-  color: white;
+  color: rgb(92, 168, 222);
+  font-family: 'Courier New';
 }
 
 .books-search-input {
   width: 30%;
-  padding: 7px;
+  padding: 10px;
   border-width: 0px;
-  border-radius: 5px;
+  border-radius: 3px;
+}
+
+.books-search-input:focus {
+  box-shadow: 4px 8px 16px 0px #aaf0f6;
+}
+
+.products-loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
 }
 
 .books-empty-container {
   display: flex;
+  flex-direction: column;
   height: 100vh;
   align-items: center;
   justify-content: center;
+}
+
+.empty-product-heading {
+  font-size: 40px;
+  font-family: 'Bree Serif';
+  font-weight: 500;
+  margin-top: 0px;
+  color: rgb(32, 32, 171);
 }
 
 .books-list {
   display: flex;
   flex-wrap: wrap;
   padding: 30px;
+  justify-content: center;
+  overflow-y: scroll;
+}
+
+.books-categories-container {
+  display: flex;
+}
+
+.category-section {
+  width: 400px;
+  box-shadow: 4px 8px 16px 0px #bfbfbf;
+}
+
+/* 
+.all-products-section {
+  border: 1px solid black;
+} */
+
+.all-books-category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.books-category-heading {
+  font-family: 'Roboto';
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.all-products-section {
+  width: 100%;
+}
+
+.clear-filters-btn {
+  background-color: rgb(41, 41, 144);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-weight: 450;
+  font-family: 'Roboto';
 }

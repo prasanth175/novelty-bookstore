@@ -36,3 +36,55 @@
   font-weight: 420;
   line-height: 20px;
 }
+
+/*----------------About Us ------------------*/
+
+.about-us-container {
+  color: white;
+  font-family: 'Mulish', sans-serif;
+  display: flex;
+  justify-content: space-around;
+  width: 80vw;
+}
+
+.about-us-main-container {
+  display: flex;
+  justify-content: center;
+  background-color: #063547;
+  padding-bottom: 30px;
+  padding-top: 20px;
+}
+
+.about-us-left {
+  width: 40%;
+}
+
+.about-us-icon {
+  background-color: white;
+  padding: 5px;
+  font-size: 40px;
+  border-radius: 50%;
+  color: black;
+  margin-right: 10px;
+}
+
+.about-us-link {
+  margin-top: 5px;
+}
+
+/*----------------------Footer ----------------------------*/
+
+.footer {
+  background-color: rgb(226, 248, 248);
+}
+
+.footer-txt {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  text-align: center;
+  padding: 30px;
+  font-size: 17px;
+  font-family: 'Roboto';
+  font-weight: 450;
+  color: rgb(86, 84, 84);
+}

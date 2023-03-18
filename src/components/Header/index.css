@@ -5,6 +5,12 @@
   font-family: 'Roboto';
   align-items: center;
   border-bottom: 1px solid rgb(233, 228, 228);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background-color: #ffffff;
 }
 
 .title-pre-heading {
@@ -71,4 +77,19 @@
   font-family: 'Roboto';
   border: 1px solid grey;
   border-radius: 3px;
+}
+
+.cart-item-count {
+  background-color: rgb(163, 181, 246);
+  color: rgb(255, 255, 255);
+  padding: 3px;
+  border-radius: 5px;
+  margin-right: 3px;
+  font-size: 12px;
+}
+
+.nav-cart {
+  border-radius: 3px;
+  box-shadow: 4px 8px 16px 0px rgb(230, 231, 230);
+  padding: 10px 15px;
 }

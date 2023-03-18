@@ -1,16 +1,25 @@
 import {Component} from 'react'
+import {AiFillLinkedin, AiFillInstagram} from 'react-icons/ai'
+
 import Cookies from 'js-cookie'
 import './index.css'
 import Header from '../Header'
+import RelatedItem from '../RelatedItem'
 
 class BookDetails extends Component {
-  state = {bookDetails: {}, bidAmount: '', mobileNumber: '', isSubmitted: false}
+  state = {
+    bookDetails: {},
+    bidAmount: '',
+    mobileNumber: '',
+    isSubmitted: false,
+    relatedList: [],
+  }
 
   onMobileNumber = event => this.setState({mobileNumber: event.target.value})
 
   onBidAmount = event => this.setState({bidAmount: event.target.value})
 
-  componentDidMount = async () => {
+  getBookDetails = async () => {
     const {match} = this.props
     const {params} = match
     const {id} = params
@@ -32,7 +41,67 @@ class BookDetails extends Component {
       file: data.dbRes.file,
       bookId: data.dbRes.bookId,
     }
-    this.setState({bookDetails: updatedData})
+    this.setState({bookDetails: updatedData}, this.getBiddingDetails)
+  }
+
+  getBiddingDetails = async () => {
+    const {bookDetails} = this.state
+    const {bookId} = bookDetails
+    const getToken = Cookies.get('jwt_token')
+
+    const url = 'http://localhost:3006/book-bid-details'
+    const options = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${getToken}`,
+      },
+      method: 'post',
+      mode: 'cors',
+      body: JSON.stringify({bookId}),
+    }
+    const resp = await fetch(url, options)
+    const data = await resp.json()
+    if (data.response !== undefined) {
+      this.setState(
+        {bidAmount: data.response.bidAmount, isSubmitted: true},
+        this.getRelatedBookDetails,
+      )
+    } else {
+      console.log('empty result')
+    }
+  }
+
+  getRelatedBookDetails = async () => {
+    const {bookDetails} = this.state
+    const {category} = bookDetails
+
+    const relatedUrl = 'http://localhost:3006/related-books'
+    const options = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify({category}),
+    }
+
+    const resp = await fetch(relatedUrl, options)
+    const data = await resp.json()
+    console.log(data.dbRes.length)
+    if (data.dbRes.length > 0) {
+      const updatedList = data.dbRes.map(each => ({
+        title: each.title,
+        file: each.file,
+        sellingPrice: each.selling_price,
+        bookId: each.bookId,
+      }))
+      this.setState({relatedList: updatedList})
+    }
+  }
+
+  componentDidMount = async () => {
+    this.getBookDetails()
+    this.getRelatedBookDetails()
   }
 
   editBidForm = () => this.setState({isSubmitted: false})
@@ -41,12 +110,15 @@ class BookDetails extends Component {
     event.preventDefault()
     const getToken = Cookies.get('jwt_token')
     const {bidAmount, mobileNumber, bookDetails} = this.state
-    const {bookId} = bookDetails
+    const {bookId, file, description, title} = bookDetails
 
     const bidDetails = {
       bookId,
       bidAmount,
       mobile: mobileNumber,
+      file,
+      description,
+      title,
     }
 
     const bidUrl = 'http://localhost:3006/biddetails'
@@ -62,8 +134,6 @@ class BookDetails extends Component {
 
     const response = await fetch(bidUrl, options)
     const data = await response.json()
-    console.log(data)
-    console.log(response)
     this.setState({isSubmitted: true})
   }
 
@@ -141,7 +211,7 @@ class BookDetails extends Component {
     } = bookDetails
 
     return (
-      <div className="book-details-container">
+      <div className="book-details-container main-section">
         <img src={file} alt={title} className="book-details-image" />
         <div className="book-details-content">
           <div>
@@ -202,10 +272,53 @@ class BookDetails extends Component {
   }
 
   render() {
+    const {relatedList} = this.state
     return (
       <>
         <Header />
         <div className="book-details">{this.renderBookDetails()}</div>
+
+        <div className="related-products">
+          <h1 className="related-heading">Related Products</h1>
+          <ul className="related-container">
+            {relatedList.map(each => (
+              <RelatedItem item={each} key={each.bookId} />
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <div className="about-us-main-container">
+            <div className="about-us-container">
+              <div className="about-us-left">
+                <h1>About Us</h1>
+                <p>
+                  Ever wanted to buy a book but could not because it was too
+                  expensive? worry not! because Novelty Bookstore is here! The
+                  Novelty Bookstore.
+                </p>
+                <div className="about-us-icons-container">
+                  <AiFillLinkedin className="about-us-icon" />
+                  <AiFillInstagram className="about-us-icon" />
+                </div>
+              </div>
+              <div className="about-us-right">
+                <h1>My Account</h1>
+                <ul>
+                  <li className="about-us-link">View Cart</li>
+                  <li className="about-us-link">Categories</li>
+                  <li className="about-us-link">Products</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="footer">
+            <p className="footer-txt">
+              © 2023 All Rights Reserved By Novelty Bookstore
+            </p>
+          </div>
+        </div>
       </>
     )
   }
