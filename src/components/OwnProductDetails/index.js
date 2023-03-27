@@ -1,28 +1,13 @@
 import {Component} from 'react'
 import {AiFillLinkedin, AiFillInstagram} from 'react-icons/ai'
-
+import {Audio} from 'react-loader-spinner'
 import './index.css'
 import Header from '../Header'
 import BidList from '../BidList'
+import RelatedItem from '../RelatedItem'
 
 class OwnProductDetails extends Component {
-  state = {ownBookDetails: {}, bidList: []}
-
-  onDeleteOwnBook = async () => {
-    const {match} = this.props
-    const {params} = match
-    const {id} = params
-    console.log(id)
-
-    const delUrl = `http://localhost:3006/products/${id}`
-    const options = {
-      method: 'DELETE',
-    }
-    const response = await fetch(delUrl, options)
-    const data = await response.json()
-    const {history} = this.props
-    history.replace('/products')
-  }
+  state = {ownBookDetails: {}, bidList: [], relatedList: [], isLoading: true}
 
   componentDidMount = async () => {
     this.getOwnBookDetails()
@@ -32,8 +17,6 @@ class OwnProductDetails extends Component {
     const {match} = this.props
     const {params} = match
     const {id} = params
-    console.log(id)
-
     const bookDetailsUrl = `http://localhost:3006/products/${id}`
     const response = await fetch(bookDetailsUrl)
     const data = await response.json()
@@ -61,7 +44,6 @@ class OwnProductDetails extends Component {
     const bidDetails = {
       bookId: id,
     }
-
     const bidDetailsUrl = 'http://localhost:3006/biddata'
     const options = {
       headers: {
@@ -71,10 +53,57 @@ class OwnProductDetails extends Component {
       mode: 'cors',
       body: JSON.stringify(bidDetails),
     }
-
     const bidResponse = await fetch(bidDetailsUrl, options)
     const bidData = await bidResponse.json()
-    this.setState({bidList: bidData.dbRes})
+    this.setState({bidList: bidData.dbRes, isLoading: false})
+  }
+
+  onDeleteOwnBook = async () => {
+    const {match} = this.props
+    const {params} = match
+    const {id} = params
+    const delUrl = `http://localhost:3006/products/${id}`
+    const options = {
+      method: 'DELETE',
+    }
+    const response = await fetch(delUrl, options)
+    const {history} = this.props
+    history.replace('/products')
+  }
+
+  renderUpdate = () => {
+    const {ownBookDetails} = this.state
+    const {bookId} = ownBookDetails
+    const {history} = this.props
+    history.replace(`/sell/${bookId}`)
+  }
+
+  getRelatedBookDetails = async () => {
+    const {bookDetails} = this.state
+    const {category} = bookDetails
+
+    const relatedUrl = 'http://localhost:3006/related-books'
+    const options = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify({category}),
+    }
+
+    const resp = await fetch(relatedUrl, options)
+    const data = await resp.json()
+    console.log(data.dbRes.length)
+    if (data.dbRes.length > 0) {
+      const updatedList = data.dbRes.map(each => ({
+        title: each.title,
+        file: each.file,
+        sellingPrice: each.selling_price,
+        bookId: each.bookId,
+      }))
+      this.setState({relatedList: updatedList})
+    }
   }
 
   renderOwnBookDetails = () => {
@@ -90,13 +119,18 @@ class OwnProductDetails extends Component {
       title,
       userId,
       file,
+      bookId,
     } = ownBookDetails
+    console.log('enter into ownbookdetails')
+    console.log(ownBookDetails)
+    console.log(bidList)
+    console.log(bookId)
 
     return (
       <div className="book-details-container main-section">
         <img src={file} alt={title} className="book-details-image" />
         <div className="book-details-content">
-          <div>
+          <div className="own-books-details">
             <h1 className="book-details-heading">{title}</h1>
             <ul className="book-details-list">
               <li className="book-details-item">
@@ -145,9 +179,14 @@ class OwnProductDetails extends Component {
           </div>
 
           <div className="own-product-buttons">
-            {/* <button className="edit-own-product-details-btn" type="button">
+            <button
+              className="edit-own-product-details-btn"
+              type="button"
+              onClick={this.renderUpdate}
+            >
               Edit Product Details
-            </button> */}
+            </button>
+
             <button
               onClick={this.onDeleteOwnBook}
               className="delete-own-product-btn"
@@ -184,15 +223,34 @@ class OwnProductDetails extends Component {
     )
   }
 
+  renderLoader = () => (
+    <div className="products-loader-container">
+      <Audio type="ThreeDots" color="#0b69ff" height="50" width="50" />
+    </div>
+  )
+
   render() {
+    const {relatedList, isLoading} = this.state
+    console.log('related list')
     return (
       <>
         <Header />
-        <div className="book-details">{this.renderOwnBookDetails()}</div>
+        {isLoading ? (
+          this.renderLoader()
+        ) : (
+          <div className="book-details">{this.renderOwnBookDetails()}</div>
+        )}
 
-        <div className="related-products">
-          <h1>Related Products</h1>
-        </div>
+        {relatedList.length > 0 && (
+          <div className="related-products">
+            <h1 className="related-heading">Related Products</h1>
+            <ul className="related-container">
+              {relatedList.map(each => (
+                <RelatedItem item={each} key={each.bookId} />
+              ))}
+            </ul>
+          </div>
+        )}
 
         <div>
           <div className="about-us-main-container">

@@ -70,6 +70,21 @@
 
 .about-us-link {
   margin-top: 5px;
+  color: white;
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 15px;
+  transition: 0.4s ease-in 0.1s;
+  cursor: pointer;
+}
+
+.about-us-link-item {
+  text-decoration: none;
+  color: white;
+}
+
+.about-us-link:hover {
+  letter-spacing: 2px;
 }
 
 /*----------------------Footer ----------------------------*/

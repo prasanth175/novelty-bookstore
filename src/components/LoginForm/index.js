@@ -16,9 +16,15 @@ class LoginForm extends Component {
 
   onPassword = event => this.setState({password: event.target.value})
 
+  getUsername = name => {
+    const {onUsername} = this.props
+    console.log(this.props)
+    onUsername(name)
+  }
+
   submitForm = event => {
     event.preventDefault()
-    this.getRegisterDetails()
+    this.getLoginDetails()
   }
 
   onSuccessApi = token => {
@@ -27,13 +33,7 @@ class LoginForm extends Component {
     history.replace('/')
   }
 
-  getUsername = name => {
-    const {onUsername} = this.props
-    console.log(this.props)
-    onUsername(name)
-  }
-
-  getRegisterDetails = async () => {
+  getLoginDetails = async () => {
     const {username, password} = this.state
     const loginDetails = {username, password}
     const loginUrl = 'http://localhost:3006/login/'
@@ -46,7 +46,6 @@ class LoginForm extends Component {
       body: JSON.stringify(loginDetails),
     }
     const response = await fetch(loginUrl, options)
-
     const data = await response.json()
     if (data.status_code === 400) {
       this.setState({errorMsg: data.error_msg, isError: true})

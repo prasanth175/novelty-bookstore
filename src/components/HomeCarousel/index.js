@@ -31,7 +31,8 @@ const HomeCarousel = () => {
           </div>
           <img
             className="carousel-img"
-            src="https://o.remove.bg/downloads/4be523f1-e782-4d16-ad6e-07d33d7f32db/OIP-removebg-preview.png"
+            src="https://o.remove.bg/downloads/a0fbc492-1fbe-4984-b345-2eb8db67b750/OIP-removebg-preview.png"
+            alt="home-img"
           />
         </div>
         <div className="carousel-item">
@@ -47,7 +48,7 @@ const HomeCarousel = () => {
           </div>
           <img
             className="carousel-img"
-            src="https://o.remove.bg/downloads/4be523f1-e782-4d16-ad6e-07d33d7f32db/OIP-removebg-preview.png"
+            src="https://o.remove.bg/downloads/a0fbc492-1fbe-4984-b345-2eb8db67b750/OIP-removebg-preview.png"
             alt="home-img"
           />
         </div>

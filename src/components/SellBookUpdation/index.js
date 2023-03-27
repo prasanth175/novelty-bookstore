@@ -52,7 +52,7 @@ const languagesList = [
   },
 ]
 
-class SellBook extends Component {
+class SellBookUpdation extends Component {
   state = {
     categoryActiveId: categoryList[0].optionId,
     languageActiveId: languagesList[0].languageId,
@@ -69,6 +69,8 @@ class SellBook extends Component {
     showMsgStatus: false,
     showMsgTxt: '',
     isSuccess: false,
+    bookDetails: {},
+    bookId: '',
   }
 
   onCategory = event => {
@@ -95,10 +97,54 @@ class SellBook extends Component {
   onFile = event => {
     const file = event.target.files[0]
     const reader = new FileReader()
+
     reader.onload = () => {
       this.setState({file: reader.result})
     }
+
     reader.readAsDataURL(file)
+  }
+
+  componentDidMount = () => {
+    this.getOwnBookDetails()
+  }
+
+  getOwnBookDetails = async () => {
+    const {match} = this.props
+    const {params} = match
+    const {id} = params
+
+    const bookDetailsUrl = `http://localhost:3006/products/${id}`
+    const response = await fetch(bookDetailsUrl)
+    const data = await response.json()
+    const updatedData = {
+      author: data.dbRes.author,
+      category: data.dbRes.category,
+      description: data.dbRes.description,
+      isbn: data.dbRes.isbn,
+      language: data.dbRes.language,
+      printedPrice: data.dbRes.printed_price,
+      publicationYear: data.dbRes.publication_year,
+      sellingPrice: data.dbRes.selling_price,
+      title: data.dbRes.title,
+      userId: data.dbRes.userId,
+      file: data.dbRes.file,
+      bookId: data.dbRes.bookId,
+    }
+    this.setState({
+      categoryActiveId: updatedData.category,
+      languageActiveId: updatedData.language,
+      title: updatedData.title,
+      author: updatedData.author,
+      description: updatedData.description,
+      publication: updatedData.publicationYear,
+      isbn: updatedData.isbn,
+      printedPrice: updatedData.printedPrice,
+      sellingPrice: updatedData.sellingPrice,
+      file: data.dbRes.file,
+      user: updatedData.userId,
+      bookId: updatedData.bookId,
+    })
   }
 
   submitSellForm = event => {
@@ -128,11 +174,11 @@ class SellBook extends Component {
         fieldsErrorTxt: 'All fields are Required*',
       })
     } else {
-      this.setState({fieldsErrorStatus: false}, this.sendSellBookDetails)
+      this.setState({fieldsErrorStatus: false}, this.updateSellBookDetails)
     }
   }
 
-  sendSellBookDetails = async () => {
+  updateSellBookDetails = async () => {
     const {
       categoryActiveId,
       languageActiveId,
@@ -144,9 +190,9 @@ class SellBook extends Component {
       printedPrice,
       sellingPrice,
       file,
+      user,
+      bookId,
     } = this.state
-    const bookId = uuidv4()
-    const getToken = Cookies.get('jwt_token')
     const sellDetails = {
       category: categoryActiveId,
       language: languageActiveId,
@@ -159,12 +205,12 @@ class SellBook extends Component {
       selling_price: sellingPrice,
       file,
       bookId,
+      userId: user,
     }
-    const sellUrl = 'http://localhost:3006/sell/'
+    const sellUrl = 'http://localhost:3006/update-sell/'
     const options = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${getToken}`,
       },
       method: 'POST',
       mode: 'cors',
@@ -326,7 +372,7 @@ class SellBook extends Component {
               <input id="fileInput" type="file" onChange={this.onFile} />
               <div className="sell-btn-container">
                 <button type="submit" className="sell-submit-btn">
-                  Submit
+                  Update
                 </button>
                 <button type="button" className="sell-clear-btn">
                   Clear
@@ -380,4 +426,4 @@ class SellBook extends Component {
   }
 }
 
-export default SellBook
+export default SellBookUpdation

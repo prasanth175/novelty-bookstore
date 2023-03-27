@@ -63,6 +63,8 @@ th {
   font-size: 15px;
   font-family: 'Roboto';
   font-weight: 500;
+  margin-bottom: 0px;
+  margin-top: 0px;
 }
 
 .details-value {

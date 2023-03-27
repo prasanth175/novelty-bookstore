@@ -1,0 +1,47 @@
+.success-container {
+  display: flex;
+  justify-content: center;
+  height: 70vh;
+  align-items: center;
+}
+
+.success-box {
+  text-align: center;
+  box-shadow: 4px 8px 16px 0px #bfbf;
+  width: 50vw;
+  padding: 30px;
+}
+
+.success-img {
+  color: green;
+  font-size: 60px;
+}
+
+.success-heading {
+  font-family: 'Roboto';
+  font-weight: bold;
+  font-size: 30px;
+  color: rgb(64, 68, 64);
+}
+
+.thank-you-txt {
+  color: grey;
+  font-family: 'Roboto';
+  font-weight: 400;
+}
+
+.greeting-txt {
+  font-family: 'Bree Serif';
+  font-weight: 450;
+  color: black;
+}
+
+.success-btn {
+  background-color: rgb(15, 15, 164);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 450;
+  font-family: 'Roboto';
+}

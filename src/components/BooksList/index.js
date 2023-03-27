@@ -61,17 +61,17 @@ class BooksList extends Component {
     const {searchInput, categoryId} = this.state
     console.log(categoryId)
     const getToken = Cookies.get('jwt_token')
+    console.log(getToken)
     console.log(searchInput)
     const booksUrl = `http://localhost:3006/books/?search_by=${searchInput}&category=${categoryId}`
     const options = {
-      header: {
+      headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${getToken}`,
       },
       method: 'GET',
       mode: 'cors',
     }
-
     const response = await fetch(booksUrl, options)
     const data = await response.json()
     if (data.dbRes.length > 0) {

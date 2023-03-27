@@ -8,14 +8,43 @@ class ChangePassword extends Component {
     errorMsg: '',
     errorStatus: false,
     currentPassword: '',
+    passwordErrorTxt: '',
+    passwordErrorStatus: '',
+    confirmPasswordErrorTxt: '',
+    confirmPasswordErrorStatus: '',
   }
 
-  onPassword = event => {
-    this.setState({password: event.target.value})
-  }
+  onCurrentPassword = event =>
+    this.setState({currentPassword: event.target.value})
 
-  onConfirmPassword = event => {
+  onPassword = event => this.setState({password: event.target.value})
+
+  onConfirmPassword = event =>
     this.setState({confirmPassword: event.target.value})
+
+  onPasswordBlur = event => {
+    if (event.target.value.length < 8) {
+      this.setState({
+        passwordErrorTxt: 'Must contain 8 characters',
+        passwordErrorStatus: true,
+      })
+    } else {
+      this.setState({passwordErrorStatus: false, passwordErrorTxt: ''})
+    }
+  }
+
+  onConfirmPasswordBlur = event => {
+    if (event.target.value.length < 8) {
+      this.setState({
+        confirmPasswordErrorTxt: 'Must contain 8 characters',
+        confirmPasswordErrorStatus: true,
+      })
+    } else {
+      this.setState({
+        confirmPasswordErrorStatus: false,
+        confirmPasswordErrorTxt: '',
+      })
+    }
   }
 
   submitPasswordForm = event => {
@@ -37,6 +66,10 @@ class ChangePassword extends Component {
       errorStatus,
       errorMsg,
       currentPassword,
+      passwordErrorStatus,
+      passwordErrorTxt,
+      confirmPasswordErrorStatus,
+      confirmPasswordErrorTxt,
     } = this.state
     return (
       <div className="change-password-container">
@@ -53,8 +86,9 @@ class ChangePassword extends Component {
             value={currentPassword}
             id="passwordId"
             className="set-password-input"
-            onChange={this.onPassword}
+            onChange={this.onCurrentPassword}
           />
+          {/* <p>{}</p> */}
           <label className="set-password-label" htmlFor="passwordId">
             New password
           </label>
@@ -64,7 +98,9 @@ class ChangePassword extends Component {
             id="passwordId"
             className="set-password-input"
             onChange={this.onPassword}
+            onBlur={this.onPasswordBlur}
           />
+          {passwordErrorTxt && <p className="error-txt">{passwordErrorTxt}</p>}
           <label className="set-password-label" htmlFor="confirmPassword">
             Confirm New password
           </label>
@@ -74,7 +110,12 @@ class ChangePassword extends Component {
             id="confirmPassword"
             className="set-password-input"
             onChange={this.onConfirmPassword}
+            onBlur={this.onConfirmPasswordBlur}
           />
+          {confirmPasswordErrorStatus && (
+            <p className="error-txt">{confirmPasswordErrorTxt}</p>
+          )}
+
           {errorStatus && <p className="error-txt">{errorMsg}</p>}
           <button className="set-password-btn" type="submit">
             Change Password

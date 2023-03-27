@@ -30,7 +30,6 @@ class OwnProducts extends Component {
       },
       method: 'GET',
     }
-
     const response = await fetch(bookUrl, options)
     const data = await response.json()
     console.log(data.dbResponse)

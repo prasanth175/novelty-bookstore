@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {Redirect, Link} from 'react-router-dom'
-import {BsPersonFill, BsFillTelephoneFill} from 'react-icons/bs'
+import {BsPersonFill} from 'react-icons/bs'
 import {IoIosMail} from 'react-icons/io'
 import {HiLockClosed, HiKey} from 'react-icons/hi'
 import './index.css'
@@ -38,28 +38,21 @@ class RegisterForm extends Component {
 
   generateOTP = async () => {
     const {email} = this.state
-    console.log(email)
     const otpUrl = 'http://localhost:3006/generate-otp'
-    try {
-      const response = await fetch(otpUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({email}),
-      })
-      const data = await response.json()
-      console.log(data.message)
-    } catch (error) {
-      console.error(error)
-    }
+    const response = await fetch(otpUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({email}),
+    })
+    const data = await response.json()
   }
 
   verifyOTP = async () => {
     const {email, otp} = this.state
     const verifyData = {email, otp}
     const otpUrl = 'http://localhost:3006/verify-otp'
-
     try {
       const response = await fetch(otpUrl, {
         method: 'POST',
@@ -69,7 +62,6 @@ class RegisterForm extends Component {
         body: JSON.stringify(verifyData),
       })
       const data = await response.json()
-      console.log(data.message)
       if (data.status === 200) {
         this.setState({
           otpVerificationStatus: true,
@@ -80,7 +72,6 @@ class RegisterForm extends Component {
         this.setState({otpStatus: true, otpTxt: data.message})
       }
     } catch (err) {
-      console.log(err)
       this.setState({otpStatus: true, otpTxt: err})
     }
   }

@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom'
 import {AiFillLinkedin, AiFillInstagram} from 'react-icons/ai'
 import './index.css'
 
@@ -7,7 +8,8 @@ const About = () => (
       <div className="about">
         <img
           className="about-img"
-          src="https://img.freepik.com/free-vector/people-outside-bookstore-vector_53876-17179.jpg?w=1060&t=st=1678338331~exp=1678338931~hmac=ae2ad43e75acb2a42725c8ce9d87def838ebd154e1493364c9610b7055329f87"
+          src="https://img.freepik.com/free-vector/
+          people-outside-bookstore-vector_53876-17179.jpg?w=1060&t=st=1678338331~exp=1678338931~hmac=ae2ad43e75acb2a42725c8ce9d87def838ebd154e1493364c9610b7055329f87"
           alt="book-store"
         />
         <div className="about-content">
@@ -41,9 +43,15 @@ const About = () => (
           <div className="about-us-right">
             <h1>My Account</h1>
             <ul>
-              <li className="about-us-link">View Cart</li>
-              <li className="about-us-link">Categories</li>
-              <li className="about-us-link">Products</li>
+              <Link to="/cart" className="about-us-link-item">
+                <li className="about-us-link">View Cart</li>
+              </Link>
+              <Link to="/books" className="about-us-link-item">
+                <li className="about-us-link">Categories</li>
+              </Link>
+              <Link to="/products" className="about-us-link-item">
+                <li className="about-us-link">Products</li>
+              </Link>
             </ul>
           </div>
         </div>

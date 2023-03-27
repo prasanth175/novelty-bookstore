@@ -38,3 +38,10 @@
   background-color: rgb(11, 76, 65);
   color: white;
 }
+
+.pay-btn {
+  background-color: rgb(66, 185, 66);
+  padding: 8px 15px;
+  color: white;
+  border-radius: 5px;
+}

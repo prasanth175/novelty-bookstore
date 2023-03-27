@@ -1,0 +1,105 @@
+.sell-book-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  font-family: 'Roboto';
+}
+
+.sell-book-inner-container {
+  width: 60%;
+}
+
+.add-book-heading {
+  align-self: flex-start;
+  border-bottom: 1px solid rgb(134, 127, 127);
+  padding-bottom: 20px;
+  color: grey;
+  font-family: 'Bree Serif';
+}
+
+/*----------------------Form Container-----------------------------*/
+
+.sell-book-form {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(231, 229, 229);
+  border-radius: 10px;
+  padding: 40px;
+  margin-bottom: 30px;
+}
+
+.sell-label {
+  font-size: 13px;
+  font-weight: 410;
+  margin-bottom: 7px;
+  color: rgb(102, 97, 97);
+}
+
+.sell-star-txt {
+  color: rgb(219, 19, 19);
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.sell-input {
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid rgb(205, 197, 197);
+  margin-bottom: 18px;
+}
+
+.sell-input:focus {
+  border: 1px solid rgb(189, 225, 246);
+  outline: 3px ridge rgb(124, 199, 243);
+}
+
+.sell-btn-container {
+  align-self: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.sell-submit-btn {
+  background-color: rgb(28, 28, 200);
+  color: white;
+  border-radius: 5px;
+  padding: 8px 15px;
+}
+
+.sell-clear-btn {
+  background-color: red;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  margin-left: 20px;
+}
+
+/*---------------error text---------*/
+
+.sell-error-txt {
+  color: red;
+  font-family: 'Roboto';
+  font-weight: 15px;
+  text-align: center;
+}
+
+.success-txt {
+  background-color: rgb(217, 250, 217);
+  border-radius: 3px;
+  padding: 20px;
+}
+
+.failure-txt {
+  background-color: rgb(248, 187, 187);
+  border-radius: 3px;
+  padding: 20px;
+}
+
+.msg-txt {
+  color: white;
+  font-family: 'Roboto';
+  font-weight: 450;
+  font-size: 15px;
+  text-align: center;
+}

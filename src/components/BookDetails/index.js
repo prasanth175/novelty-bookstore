@@ -273,19 +273,22 @@ class BookDetails extends Component {
 
   render() {
     const {relatedList} = this.state
+    console.log(relatedList.length)
     return (
       <>
         <Header />
         <div className="book-details">{this.renderBookDetails()}</div>
 
-        <div className="related-products">
-          <h1 className="related-heading">Related Products</h1>
-          <ul className="related-container">
-            {relatedList.map(each => (
-              <RelatedItem item={each} key={each.bookId} />
-            ))}
-          </ul>
-        </div>
+        {relatedList.length > 0 && (
+          <div className="related-products">
+            <h1 className="related-heading">Related Products</h1>
+            <ul className="related-container">
+              {relatedList.map(each => (
+                <RelatedItem item={each} key={each.bookId} />
+              ))}
+            </ul>
+          </div>
+        )}
 
         <div>
           <div className="about-us-main-container">

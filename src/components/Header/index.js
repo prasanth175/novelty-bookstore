@@ -37,7 +37,6 @@ class Header extends Component {
       },
       method: 'GET',
     }
-
     const response = await fetch(url, options)
     const data = await response.json()
     console.log(data.response)
@@ -80,7 +79,6 @@ class Header extends Component {
             <li className="nav-item">About</li>
           </Link>
         </ul>
-
         <div className="login-register-list">
           <select
             className="user-data"
@@ -90,7 +88,6 @@ class Header extends Component {
             <option>Hi, {activeUsername}</option>
             <option value="products">Your Products</option>
             <option value="Change Password">Change Password</option>
-            <option>Contact Us</option>
             <option>About</option>
           </select>
           <Link to="/cart" className="nav-link">

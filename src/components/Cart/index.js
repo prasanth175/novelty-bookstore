@@ -1,7 +1,8 @@
 import {Component} from 'react'
+import {AiFillLinkedin, AiFillInstagram} from 'react-icons/ai'
+
 import Cookies from 'js-cookie'
 import {Audio} from 'react-loader-spinner'
-
 import './index.css'
 import Header from '../Header'
 import CartItem from '../CartItem'
@@ -26,7 +27,6 @@ class Cart extends Component {
       },
       method: 'GET',
     }
-
     const response = await fetch(url, options)
     const data = await response.json()
     if (response.ok === true) {
@@ -43,14 +43,16 @@ class Cart extends Component {
   renderSuccessView = () => {
     const {cartList} = this.state
     return (
-      <div className="cart-container main-section">
-        <h1 className="cart-heading">Shopping Cart</h1>
-        <ul className="cart-list">
-          {cartList.map(each => (
-            <CartItem item={each} />
-          ))}
-        </ul>
-      </div>
+      <>
+        <div className="cart-container main-section">
+          <h1 className="cart-heading">Shopping Cart</h1>
+          <ul className="cart-list">
+            {cartList.map(each => (
+              <CartItem item={each} />
+            ))}
+          </ul>
+        </div>
+      </>
     )
   }
 
@@ -92,6 +94,38 @@ class Cart extends Component {
       <>
         <Header />
         {this.renderAllDetails()}
+        <div>
+          <div className="about-us-main-container">
+            <div className="about-us-container">
+              <div className="about-us-left">
+                <h1>About Us</h1>
+                <p>
+                  Ever wanted to buy a book but could not because it was too
+                  expensive? worry not! because Novelty Bookstore is here! The
+                  Novelty Bookstore.
+                </p>
+                <div className="about-us-icons-container">
+                  <AiFillLinkedin className="about-us-icon" />
+                  <AiFillInstagram className="about-us-icon" />
+                </div>
+              </div>
+              <div className="about-us-right">
+                <h1>My Account</h1>
+                <ul>
+                  <li className="about-us-link">View Cart</li>
+                  <li className="about-us-link">Categories</li>
+                  <li className="about-us-link">Products</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="footer">
+            <p className="footer-txt">
+              © 2023 All Rights Reserved By Novelty Bookstore
+            </p>
+          </div>
+        </div>
       </>
     )
   }
