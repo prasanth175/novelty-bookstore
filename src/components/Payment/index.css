@@ -73,3 +73,59 @@
 .payment-btn:hover {
   letter-spacing: 2px;
 }
+
+@media (max-width: 900px) {
+  .payment-book-image {
+    width: 300px;
+    height: 70vh;
+    align-self: center;
+  }
+
+  .pay-details {
+    height: 70vh;
+  }
+}
+
+@media (max-width: 680px) {
+  .payment-book-image {
+    width: 250px;
+    height: 60vh;
+  }
+
+  .pay-details {
+    height: 60vh;
+  }
+}
+
+@media (max-width: 570px) {
+  .pay-box {
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 70%;
+  }
+  .payment-book-image {
+    width: 90%;
+    height: 100%;
+  }
+
+  .pay-details {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+  .pay-box {
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 50%;
+  }
+}
+
+@media (max-width: 350px) {
+  .pay-box {
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 30%;
+  }
+}

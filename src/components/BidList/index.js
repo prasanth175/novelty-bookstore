@@ -13,19 +13,18 @@ class BidList extends Component {
   render() {
     const {count, isAccepted} = this.state
     const {item} = this.props
-    const {bidAmount, bookId, mobile, user} = item
-    console.log(count)
+    const {bidAmount, mobile, user} = item
     return (
       <tr className="bid-details-item">
-        <td className="bid-count-btn">{count}</td>
-        <td className="bid-user">{user}</td>
-        <td className="bidding-amount">{bidAmount}</td>
+        <td className="bid-count-btn bid-table-value">{count}</td>
+        <td className="bid-user bid-table-value">{user}</td>
+        <td className="bidding-amount bid-table-value">{bidAmount}</td>
         <td className="bidding-options-btn">
           {isAccepted ? (
-            <p className="accepted-number">{mobile}</p>
+            <p className="accepted-number bid-table-value">{mobile}</p>
           ) : (
             <button
-              className="bid-accept-btn"
+              className="bid-accept-btn bid-table-value"
               type="button"
               onClick={this.onBidAccept}
             >
@@ -33,7 +32,7 @@ class BidList extends Component {
             </button>
           )}
           <button
-            className="bid-decline-btn"
+            className="bid-decline-btn bid-table-value"
             type="button"
             onClick={this.onBidDecline}
           >

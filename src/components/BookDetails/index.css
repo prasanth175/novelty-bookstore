@@ -6,12 +6,17 @@
 .book-details-container {
   display: flex;
   margin: 50px;
-  width: 70vw;
+  width: 80vw;
+  height: 100%;
 }
 
 .book-details-image {
-  width: 50%;
-  height: 70%;
+  width: 800px;
+  height: 750px;
+  border: 1px solid rgb(192, 190, 190);
+  padding: 5px;
+  border-radius: 5px;
+  align-self: center;
 }
 
 .book-details-content {
@@ -116,3 +121,67 @@
   flex-wrap: wrap;
   width: 80vw;
 }
+
+@media (max-width: 1000px) {
+  .book-details-image {
+    width: 600px;
+    height: 600px;
+  }
+  .book-details-content {
+    margin-left: 50px;
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 1050px) {
+  .book-details-image {
+    width: 500px;
+    height: 500px;
+  }
+
+  .details-bidding-heading {
+    font-size: 100%;
+  }
+
+  .bid-msg-txt {
+    font-size: 100%;
+  }
+}
+
+@media (max-width: 830px) {
+  .book-details-image {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 700px) {
+  .book-details-image {
+    width: 300px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 750px) {
+  .book-details-image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .book-details-container {
+    flex-direction: column;
+  }
+
+  .book-details-content {
+    margin-left: 0px;
+  }
+}
+
+/* @media (max-width: 330px) {
+  .book-details-image {
+    width: 250px;
+    height: 350px;
+  }
+} */

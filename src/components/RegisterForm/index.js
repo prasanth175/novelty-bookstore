@@ -39,14 +39,13 @@ class RegisterForm extends Component {
   generateOTP = async () => {
     const {email} = this.state
     const otpUrl = 'http://localhost:3006/generate-otp'
-    const response = await fetch(otpUrl, {
+    await fetch(otpUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({email}),
     })
-    const data = await response.json()
   }
 
   verifyOTP = async () => {
@@ -144,12 +143,6 @@ class RegisterForm extends Component {
       email,
       username,
     } = this.state
-
-    // console.log(validConfirmPassword)
-    // console.log(validEmail)
-    // console.log(validPassword)
-    // console.log(otpVerificationStatus)
-
     if (
       validConfirmPassword &&
       validEmail &&
@@ -206,7 +199,6 @@ class RegisterForm extends Component {
     const response = await fetch(url, options)
 
     const data = await response.json()
-    console.log(data.error_txt)
     if (data.status_code === 200) {
       history.replace('/')
     } else {
@@ -239,7 +231,6 @@ class RegisterForm extends Component {
       usernameErrorMsg,
       usernameErrorStatus,
     } = this.state
-    console.log(isSend)
 
     return (
       <div className="register">
@@ -286,16 +277,6 @@ class RegisterForm extends Component {
                   <p className="register-error-msg blur-msg">{emailErrorMsg}</p>
                 )}
               </div>
-
-              {/* <div className="register-input-field">
-                <BsFillTelephoneFill className="register-icon" />
-                <input
-                  placeholder="Mobile Number"
-                  className="register-input"
-                  onChange={this.onMobile}
-                  value={mobile}
-                />
-              </div> */}
 
               <div className="register-input-item">
                 <div className="register-input-field">

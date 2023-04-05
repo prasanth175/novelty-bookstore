@@ -60,15 +60,6 @@
   width: 100%;
 }
 
-.register-heading {
-  font-size: 40px;
-  margin-bottom: 30px;
-  font-family: 'Bree Serif';
-  text-align: center;
-  margin-top: 0px;
-  color: rgb(43, 52, 236);
-}
-
 .register-error-msg {
   margin-top: 3px;
   color: red;
@@ -145,5 +136,23 @@
     margin-top: 0px;
     display: block;
     color: rgb(43, 52, 236);
+  }
+}
+
+@media (max-width: 350px) {
+  .login-container {
+    width: 100vw;
+    padding: 20px;
+    padding-right: 10px;
+  }
+
+  .login-form-field {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .login-image {
+    width: 80%;
+    height: 70%;
   }
 }

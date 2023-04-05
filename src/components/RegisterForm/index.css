@@ -94,6 +94,8 @@
   font-size: 40px;
   margin-bottom: 50px;
   font-family: 'Bree Serif';
+  color: rgb(19, 19, 151);
+  text-align: center;
 }
 
 .register-form {
@@ -164,5 +166,33 @@
     margin-top: 0px;
     display: block;
     color: rgb(43, 52, 236);
+  }
+}
+
+@media (max-width: 420px) {
+  .register-container {
+    width: 100vw;
+    padding: 20px;
+    padding-right: 10px;
+  }
+
+  .register-form-field {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .register-image {
+    width: 80%;
+    height: 70%;
+  }
+
+  .otp-btn {
+    width: 40%;
+  }
+}
+
+@media (max-width: 300px) {
+  .otp-btn {
+    width: 50%;
   }
 }

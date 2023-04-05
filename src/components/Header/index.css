@@ -27,11 +27,13 @@
   font-weight: bold;
   margin-bottom: 10px;
   padding-left: 20px;
+  text-decoration: none;
 }
 
 .nav-items-list {
   display: flex;
   margin-bottom: 0px;
+  align-items: center;
 }
 
 .login-register-list {
@@ -45,6 +47,7 @@
   text-decoration: none;
   color: rgb(61, 59, 59);
   font-weight: 500;
+  margin-left: 20px;
 }
 
 .nav-item {
@@ -90,6 +93,104 @@
 
 .nav-cart {
   border-radius: 3px;
-  box-shadow: 4px 8px 16px 0px rgb(230, 231, 230);
+  /* box-shadow: 4px 8px 16px 0px rgb(230, 231, 230); */
   padding: 10px 15px;
+  text-decoration: none;
+}
+
+.drop-down-menu {
+  display: none;
+}
+
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-nav {
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.menu-btn {
+  color: grey;
+  font-size: 30px;
+}
+
+.dropdown {
+  margin-right: 5px;
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+  color: grey;
+}
+
+.custom-dropdown {
+  display: flex;
+  flex-direction: column;
+  margin-right: 5px;
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+  color: grey;
+}
+
+.drop-cancel-btn {
+  align-self: flex-end;
+}
+
+.drop-cancel-icon {
+  font-size: 25px;
+  color: rgb(185, 180, 180);
+}
+
+.drop-cancel-icon:hover {
+  color: black;
+}
+
+.dropdown-menu {
+  box-shadow: 4px 8px 16px 0px #bfbf;
+}
+
+/* .dropdown-item {
+  text-align: right;
+} */
+
+.nav-drop-item {
+  font-size: 15px;
+  font-family: 'Roboto';
+  font-weight: 450;
+  padding-bottom: 10px;
+}
+
+.nav-drop-item:hover {
+  letter-spacing: 2px;
+  transition: 0.2s ease-out 0.1s;
+}
+
+.close-drop {
+  display: none;
+}
+
+@media (max-width: 1020px) {
+  .drop-down-menu {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-toggle-items {
+    display: none;
+  }
+  .nar-item {
+    margin-right: 0px;
+  }
+}
+
+@media (max-width: 490px) {
+  .website-title-heading {
+    font-size: 100%;
+  }
 }

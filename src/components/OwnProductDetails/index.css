@@ -77,3 +77,22 @@ th {
 .own-product-price-details {
   font-family: 'Calibri';
 }
+
+@media (max-width: 530px) {
+  .own-product-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .edit-own-product-details-btn {
+    margin-right: 0px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 370px) {
+  .bidding-top-txt {
+    font-size: 10px;
+  }
+}

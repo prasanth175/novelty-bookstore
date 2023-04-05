@@ -4,6 +4,7 @@
   padding-top: 50px;
   background-color: rgb(241, 245, 245);
   padding-bottom: 50px;
+  margin-top: 72px;
 }
 
 .about {
@@ -12,8 +13,8 @@
 }
 
 .about-img {
-  height: 400px;
-  width: 600px;
+  height: 100%;
+  width: 60%;
 }
 
 .about-content {
@@ -60,7 +61,7 @@
 }
 
 .about-us-icon {
-  background-color: white;
+  background-color: rgb(221, 217, 217);
   padding: 5px;
   font-size: 40px;
   border-radius: 50%;
@@ -70,7 +71,7 @@
 
 .about-us-link {
   margin-top: 5px;
-  color: white;
+  color: rgb(231, 231, 231);
   font-family: 'Roboto';
   font-weight: 400;
   font-size: 15px;
@@ -102,4 +103,67 @@
   font-family: 'Roboto';
   font-weight: 450;
   color: rgb(86, 84, 84);
+}
+
+/* ----------------------About----------------*/
+
+@media (max-width: 780px) {
+  .about {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-img {
+    width: 100%;
+  }
+
+  .about-content {
+    margin-left: 0px;
+  }
+
+  .about-txt {
+    margin-top: 0px;
+  }
+}
+
+@media (max-width: 404px) {
+  .about-heading {
+    font-size: 100%;
+  }
+
+  .about-txt {
+    font-size: 70%;
+  }
+}
+
+/* ----------------------About Us----------------*/
+
+@media (max-width: 600px) {
+  .about-us-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-us-left {
+    width: 100%;
+  }
+
+  .about-us-txt {
+    width: 100%;
+    color: rgb(214, 210, 210);
+  }
+}
+
+@media (max-width: 404px) {
+  .about-us-heading {
+    font-size: 100%;
+  }
+
+  .about-us-txt {
+    font-size: 70%;
+  }
+
+  .about-us-link {
+    font-size: 70%;
+  }
 }

@@ -72,7 +72,6 @@ class SellBook extends Component {
   }
 
   onCategory = event => {
-    console.log(event.target.value.textContent)
     this.setState({categoryActiveId: event.target.value})
   }
 
@@ -172,8 +171,6 @@ class SellBook extends Component {
     }
     const response = await fetch(sellUrl, options)
     const data = await response.json()
-    console.log(response)
-    console.log(data)
     if (data.status === 200) {
       this.setState({
         showMsgStatus: true,
@@ -200,7 +197,6 @@ class SellBook extends Component {
       isbn,
       printedPrice,
       sellingPrice,
-      file,
       fieldsErrorStatus,
       fieldsErrorTxt,
       showMsgStatus,

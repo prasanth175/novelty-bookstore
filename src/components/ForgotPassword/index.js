@@ -38,7 +38,6 @@ class ForgotPassword extends Component {
 
   validationForMail = () => {
     const {email, mailErrorStatus} = this.state
-    console.log(mailErrorStatus)
     if (email === '' && mailErrorStatus) {
       this.setState({
         mailErrorStatus: true,
@@ -107,8 +106,6 @@ class ForgotPassword extends Component {
     }
     const res = await fetch(setPasswordUrl, options)
     const data = await res.json()
-    console.log(res.ok)
-    console.log(data)
     if (data.status === 200) {
       const {history} = this.props
       history.replace('/')
@@ -119,24 +116,19 @@ class ForgotPassword extends Component {
         showRegister: true,
       })
     }
-    // if (res.ok === true) {
-    //   const {history} = this.props
-    //   history.replace('/')
-    // }
   }
 
   generateOTP = async () => {
     const {email} = this.state
     const otpUrl = 'http://localhost:3006/generate-otp'
     try {
-      const response = await fetch(otpUrl, {
+      await fetch(otpUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({email}),
       })
-      const data = await response.json()
     } catch (error) {
       console.error(error)
     }
@@ -156,14 +148,12 @@ class ForgotPassword extends Component {
         body: JSON.stringify(verifyData),
       })
       const data = await response.json()
-      console.log(data.status)
       if (data.status === 200) {
         this.setState({otpSubmitted: true})
       } else {
         this.setState({otpStatus: true, otpTxt: data.message})
       }
     } catch (err) {
-      console.log('error')
       this.setState({otpStatus: true, otpTxt: err})
     }
   }
@@ -207,7 +197,7 @@ class ForgotPassword extends Component {
     return (
       <>
         <p className="forgot-txt">
-          Enter the email address associated with your account and we'll send
+          Enter the email address associated with your account and we will send
           you a link to reset your password.
         </p>
         <label className="forgot-label" htmlFor="emailId">
@@ -232,7 +222,7 @@ class ForgotPassword extends Component {
           Continue
         </button>
         <p className="forgot-bottom-txt">
-          Don't have an account?
+          Do not have an account?
           <Link to="/register">
             <span className="forgot-signup-txt">Sign Up</span>
           </Link>

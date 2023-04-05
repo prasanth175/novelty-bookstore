@@ -1,10 +1,11 @@
 import {Link} from 'react-router-dom'
 import {AiFillLinkedin, AiFillInstagram} from 'react-icons/ai'
-import './index.css'
+import Header from '../Header'
 
-const About = () => (
+const AboutSection = () => (
   <>
-    <div id="aboutId" className="about-container">
+    <Header />
+    <div id="aboutId" className="about-container main-section">
       <div className="about">
         <img
           className="about-img"
@@ -65,4 +66,4 @@ const About = () => (
     </div>
   </>
 )
-export default About
+export default AboutSection

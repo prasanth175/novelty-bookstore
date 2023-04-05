@@ -1,5 +1,5 @@
 {
-  "name": "the-novelty-bookstore",
+  "name": "nxt-trendz-authentication",
   "private": true,
   "version": "1.0.0",
   "engines": {
@@ -17,6 +17,7 @@
     "otp-generator": "4.0.1",
     "razorpay": "2.8.6",
     "react": "17.0.1",
+    "react-bootstrap": "2.7.2",
     "react-dom": "17.0.1",
     "react-icons": "4.8.0",
     "react-loader-spinner": "5.3.4",

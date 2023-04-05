@@ -2,12 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
+  width: 90vw;
   font-family: 'Roboto';
 }
 
 .sell-book-inner-container {
-  width: 60%;
+  width: 70%;
 }
 
 .add-book-heading {
@@ -102,4 +102,20 @@
   font-weight: 450;
   font-size: 15px;
   text-align: center;
+}
+
+@media (max-width: 410px) {
+  .sell-book-inner-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .sell-book-container {
+    width: 100%;
+  }
+
+  .sell-book-form {
+    width: 100%;
+    padding: 10px;
+  }
 }

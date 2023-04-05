@@ -44,11 +44,11 @@ class Cart extends Component {
     const {cartList} = this.state
     return (
       <>
-        <div className="cart-container main-section">
+        <div className="own-products-box">
           <h1 className="cart-heading">Shopping Cart</h1>
-          <ul className="cart-list">
+          <ul className="own-products-list">
             {cartList.map(each => (
-              <CartItem item={each} />
+              <CartItem item={each} key={each.bookId} />
             ))}
           </ul>
         </div>
@@ -88,8 +88,6 @@ class Cart extends Component {
   }
 
   render() {
-    const {cartList} = this.state
-    console.log(cartList)
     return (
       <>
         <Header />

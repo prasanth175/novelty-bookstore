@@ -199,3 +199,9 @@
   cursor: pointer;
   text-align: center;
 }
+
+@media (max-width: 380px) {
+  .forgot-otp-sent-txt {
+    font-size: 30px;
+  }
+}

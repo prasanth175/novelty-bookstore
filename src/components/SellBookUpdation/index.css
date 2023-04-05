@@ -1,13 +1,9 @@
-.sell-book-container {
+/* .sell-book-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100vw;
   font-family: 'Roboto';
-}
-
-.sell-book-inner-container {
-  width: 60%;
 }
 
 .add-book-heading {
@@ -16,11 +12,11 @@
   padding-bottom: 20px;
   color: grey;
   font-family: 'Bree Serif';
-}
+} */
 
 /*----------------------Form Container-----------------------------*/
 
-.sell-book-form {
+/* .sell-book-form {
   display: flex;
   flex-direction: column;
   border: 1px solid rgb(231, 229, 229);
@@ -73,7 +69,7 @@
   padding: 8px 15px;
   border-radius: 5px;
   margin-left: 20px;
-}
+} */
 
 /*---------------error text---------*/
 

@@ -9,21 +9,15 @@ class Payment extends Component {
     price: '',
     total: '',
     username: '',
-    mail: '',
-    paymentDetails: {},
   }
 
   componentDidMount = async () => {
-    console.log(this.props)
     const {match} = this.props
     const {params} = match
     const {id} = params
-    console.log(id)
     const paymentUrl = `http://localhost:3006/payments/${id}`
     const response = await fetch(paymentUrl)
     const data = await response.json()
-    console.log(response)
-    console.log(data)
     this.setState(
       {
         imageUrl: data.dbRes.file,
@@ -47,7 +41,6 @@ class Payment extends Component {
     }
     const response = await fetch(mailUrl, options)
     const data = await response.json()
-    console.log(data)
     this.setState({email: data.dbRes.email})
   }
 
@@ -80,16 +73,13 @@ class Payment extends Component {
       name: 'Prasanth Kumar Kodamanchili',
       description: 'Your payment description',
       order_id: order.id,
-      handler: response => {
-        // handle successful payment
+      handler: () => {
         // const updatedObj = {
         //   orderId: response.razorpay_order_id,
         //   paymentId: response.razorpay_payment_id,
         //   signature: response.razorpay_signature,
         // }
-        // console.log(response)
         // this.setState({paymentDetails: updatedObj})
-        console.log(response)
         const {history} = this.props
         history.replace('/payment-success')
       },
@@ -136,15 +126,12 @@ class Payment extends Component {
 
   render() {
     const {imageUrl, price, total} = this.state
-
     return (
       <>
         <Header />
         <div className="payment-container">
           <div className="pay-box">
-            <div>
-              <img className="payment-book-image" src={imageUrl} alt="book" />
-            </div>
+            <img className="payment-book-image" src={imageUrl} alt="book" />
             <div className="pay-details">
               <p className="order-txt">Order Summary</p>
               <hr className="pay-line" />

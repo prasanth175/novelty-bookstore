@@ -1,17 +1,21 @@
 import {Component} from 'react'
+import {Link} from 'react-router-dom'
+import Cookies from 'js-cookie'
 import './index.css'
 
 class ChangePassword extends Component {
   state = {
     password: '',
     confirmPassword: '',
-    errorMsg: '',
-    errorStatus: false,
     currentPassword: '',
     passwordErrorTxt: '',
     passwordErrorStatus: '',
     confirmPasswordErrorTxt: '',
     confirmPasswordErrorStatus: '',
+    currentPasswordErrorTxt: '',
+    currentPasswordErrorStatus: false,
+    mainErrStatus: false,
+    mainErrTxt: '',
   }
 
   onCurrentPassword = event =>
@@ -34,9 +38,10 @@ class ChangePassword extends Component {
   }
 
   onConfirmPasswordBlur = event => {
-    if (event.target.value.length < 8) {
+    const {password} = this.state
+    if (event.target.value !== password) {
       this.setState({
-        confirmPasswordErrorTxt: 'Must contain 8 characters',
+        confirmPasswordErrorTxt: "Password doesn't Match",
         confirmPasswordErrorStatus: true,
       })
     } else {
@@ -47,15 +52,54 @@ class ChangePassword extends Component {
     }
   }
 
-  submitPasswordForm = event => {
+  submitPasswordForm = async event => {
     event.preventDefault()
-    const {password, confirmPassword} = this.state
-    if (password !== confirmPassword) {
-      this.setState({errorStatus: true, errorMsg: 'Password does not Match'})
+    const getToken = Cookies.get('jwt_token')
+    const {
+      confirmPassword,
+      currentPassword,
+      passwordErrorStatus,
+      confirmPasswordErrorStatus,
+      password,
+    } = this.state
+    const passDetails = {
+      currentPassword,
+      confirmPassword,
+    }
+    const passUrl = 'http://localhost:3006/change-password'
+    const options = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${getToken}`,
+      },
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify(passDetails),
+    }
+
+    if (
+      passwordErrorStatus === false &&
+      confirmPasswordErrorStatus === false &&
+      password !== '' &&
+      confirmPassword !== '' &&
+      currentPassword !== ''
+    ) {
+      const response = await fetch(passUrl, options)
+      const data = await response.json()
+      if (data.error_code === 200) {
+        const {history} = this.props
+        history.replace('/')
+      } else {
+        this.setState({
+          currentPasswordErrorTxt: data.error_msg,
+          currentPasswordErrorStatus: true,
+        })
+      }
     } else {
-      console.log('entered')
-      console.log(this.props)
-      this.onSetPassword(password, confirmPassword)
+      this.setState({
+        mainErrStatus: true,
+        mainErrTxt: '*All fields are required',
+      })
     }
   }
 
@@ -63,13 +107,14 @@ class ChangePassword extends Component {
     const {
       password,
       confirmPassword,
-      errorStatus,
-      errorMsg,
       currentPassword,
-      passwordErrorStatus,
       passwordErrorTxt,
       confirmPasswordErrorStatus,
       confirmPasswordErrorTxt,
+      currentPasswordErrorTxt,
+      currentPasswordErrorStatus,
+      mainErrStatus,
+      mainErrTxt,
     } = this.state
     return (
       <div className="change-password-container">
@@ -88,7 +133,14 @@ class ChangePassword extends Component {
             className="set-password-input"
             onChange={this.onCurrentPassword}
           />
-          {/* <p>{}</p> */}
+          {currentPasswordErrorStatus && (
+            <div className="error-div">
+              <p className="error-txt">{currentPasswordErrorTxt}</p>
+              <Link to="/password">
+                <p className="forgot-password-txt">Forgot Password ?</p>
+              </Link>
+            </div>
+          )}
           <label className="set-password-label" htmlFor="passwordId">
             New password
           </label>
@@ -115,11 +167,12 @@ class ChangePassword extends Component {
           {confirmPasswordErrorStatus && (
             <p className="error-txt">{confirmPasswordErrorTxt}</p>
           )}
-
-          {errorStatus && <p className="error-txt">{errorMsg}</p>}
           <button className="set-password-btn" type="submit">
             Change Password
           </button>
+          {mainErrStatus && (
+            <p className="error-txt main-error">{mainErrTxt}</p>
+          )}
         </form>
       </div>
     )

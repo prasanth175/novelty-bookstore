@@ -4,10 +4,9 @@ import {Audio} from 'react-loader-spinner'
 import './index.css'
 import Header from '../Header'
 import BidList from '../BidList'
-import RelatedItem from '../RelatedItem'
 
 class OwnProductDetails extends Component {
-  state = {ownBookDetails: {}, bidList: [], relatedList: [], isLoading: true}
+  state = {ownBookDetails: {}, bidList: [], isLoading: true}
 
   componentDidMount = async () => {
     this.getOwnBookDetails()
@@ -66,7 +65,7 @@ class OwnProductDetails extends Component {
     const options = {
       method: 'DELETE',
     }
-    const response = await fetch(delUrl, options)
+    await fetch(delUrl, options)
     const {history} = this.props
     history.replace('/products')
   }
@@ -76,34 +75,6 @@ class OwnProductDetails extends Component {
     const {bookId} = ownBookDetails
     const {history} = this.props
     history.replace(`/sell/${bookId}`)
-  }
-
-  getRelatedBookDetails = async () => {
-    const {bookDetails} = this.state
-    const {category} = bookDetails
-
-    const relatedUrl = 'http://localhost:3006/related-books'
-    const options = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      mode: 'cors',
-      body: JSON.stringify({category}),
-    }
-
-    const resp = await fetch(relatedUrl, options)
-    const data = await resp.json()
-    console.log(data.dbRes.length)
-    if (data.dbRes.length > 0) {
-      const updatedList = data.dbRes.map(each => ({
-        title: each.title,
-        file: each.file,
-        sellingPrice: each.selling_price,
-        bookId: each.bookId,
-      }))
-      this.setState({relatedList: updatedList})
-    }
   }
 
   renderOwnBookDetails = () => {
@@ -119,12 +90,7 @@ class OwnProductDetails extends Component {
       title,
       userId,
       file,
-      bookId,
     } = ownBookDetails
-    console.log('enter into ownbookdetails')
-    console.log(ownBookDetails)
-    console.log(bidList)
-    console.log(bookId)
 
     return (
       <div className="book-details-container main-section">
@@ -197,7 +163,7 @@ class OwnProductDetails extends Component {
           </div>
 
           <div className="bidding-list-container">
-            <h1 className="bidding-list-heading">Bidding List</h1>
+            <h1 className="bidding-list-heading">Bargain List</h1>
             <table>
               <thead className="bidding-headings">
                 <tr className="bidding-head-row">
@@ -230,8 +196,7 @@ class OwnProductDetails extends Component {
   )
 
   render() {
-    const {relatedList, isLoading} = this.state
-    console.log('related list')
+    const {isLoading} = this.state
     return (
       <>
         <Header />
@@ -239,17 +204,6 @@ class OwnProductDetails extends Component {
           this.renderLoader()
         ) : (
           <div className="book-details">{this.renderOwnBookDetails()}</div>
-        )}
-
-        {relatedList.length > 0 && (
-          <div className="related-products">
-            <h1 className="related-heading">Related Products</h1>
-            <ul className="related-container">
-              {relatedList.map(each => (
-                <RelatedItem item={each} key={each.bookId} />
-              ))}
-            </ul>
-          </div>
         )}
 
         <div>

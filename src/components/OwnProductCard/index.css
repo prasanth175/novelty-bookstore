@@ -1,7 +1,7 @@
 .own-book-list-item {
   padding: 20px;
   box-shadow: 4px 8px 10px 0px #dae3e0;
-  width: 50vw;
+  width: 50%;
   margin-bottom: 50px;
   border-radius: 5px;
 }
@@ -67,3 +67,66 @@
   color: rgb(9, 17, 86);
   font-family: 'Franklin Gothic Medium';
 }
+
+@media (max-width: 900px) {
+  .own-book-list-item {
+    width: 70vw;
+  }
+}
+
+@media (max-width: 700px) {
+  .own-book-list-item {
+    width: 90vw;
+  }
+}
+
+@media (max-width: 650px) {
+  .own-book-image {
+    height: 200px;
+    width: 150px;
+  }
+
+  .own-product-title {
+    font-size: 100%;
+  }
+
+  .own-product-desc {
+    font-size: 70%;
+  }
+}
+
+@media (max-width: 500px) {
+  .own-book-item {
+    flex-direction: column;
+    padding-bottom: 0px;
+  }
+
+  .own-book-image {
+    align-self: center;
+  }
+
+  .view-btn-price {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .own-book-content {
+    align-items: center;
+    text-align: center;
+    margin-left: 0px;
+  }
+
+  .own-book-list-item {
+    width: 70vw;
+    height: 100%;
+  }
+}
+
+/* @media (max-width: 440px) {
+  .view-btn-price {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+  }
+} */

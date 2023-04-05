@@ -3,6 +3,7 @@
   justify-content: center;
   height: 70vh;
   align-items: center;
+  width: 100vw;
 }
 
 .success-box {
@@ -44,4 +45,20 @@
   font-size: 15px;
   font-weight: 450;
   font-family: 'Roboto';
+}
+
+@media (max-width: 650px) {
+  .success-box {
+    width: 80vw;
+  }
+}
+
+@media (max-width: 330px) {
+  .success-heading {
+    font-size: 20px;
+  }
+
+  .thank-you-txt {
+    font-size: 12px;
+  }
 }

@@ -9,7 +9,6 @@ class LoginForm extends Component {
     password: '',
     isError: false,
     errorMsg: '',
-    activeUser: '',
   }
 
   onInput = event => this.setState({username: event.target.value})
@@ -18,7 +17,6 @@ class LoginForm extends Component {
 
   getUsername = name => {
     const {onUsername} = this.props
-    console.log(this.props)
     onUsername(name)
   }
 
@@ -59,8 +57,7 @@ class LoginForm extends Component {
     if (getToken !== undefined) {
       return <Redirect to="/" />
     }
-    const {username, isError, errorMsg, activeUser} = this.state
-    console.log(activeUser)
+    const {username, isError, errorMsg} = this.state
 
     return (
       <div className="register">

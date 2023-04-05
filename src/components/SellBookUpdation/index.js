@@ -1,6 +1,4 @@
 import {Component} from 'react'
-import Cookies from 'js-cookie'
-import {v4 as uuidv4} from 'uuid'
 import {AiFillLinkedin, AiFillInstagram} from 'react-icons/ai'
 
 import './index.css'
@@ -69,12 +67,10 @@ class SellBookUpdation extends Component {
     showMsgStatus: false,
     showMsgTxt: '',
     isSuccess: false,
-    bookDetails: {},
     bookId: '',
   }
 
   onCategory = event => {
-    console.log(event.target.value.textContent)
     this.setState({categoryActiveId: event.target.value})
   }
 
@@ -218,8 +214,6 @@ class SellBookUpdation extends Component {
     }
     const response = await fetch(sellUrl, options)
     const data = await response.json()
-    console.log(response)
-    console.log(data)
     if (data.status === 200) {
       this.setState({
         showMsgStatus: true,
@@ -246,7 +240,6 @@ class SellBookUpdation extends Component {
       isbn,
       printedPrice,
       sellingPrice,
-      file,
       fieldsErrorStatus,
       fieldsErrorTxt,
       showMsgStatus,

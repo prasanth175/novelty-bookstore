@@ -31,3 +31,15 @@
   text-decoration: none;
   width: 30%;
 }
+
+@media (max-width: 600px) {
+  .category-link {
+    flex-basis: 40%;
+  }
+}
+
+@media (max-width: 350px) {
+  .category-link {
+    flex-basis: 100%;
+  }
+}

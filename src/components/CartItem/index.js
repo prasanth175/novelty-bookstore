@@ -3,26 +3,24 @@ import './index.css'
 
 const CartItem = props => {
   const {item} = props
-  const {user, bookId, bidAmount, mobile, title, description, file} = item
+  const {bookId, title, description, file} = item
 
   const removeCartItem = async () => {
     const url = `http://localhost:3006/cart-details/${bookId}`
     const options = {
       method: 'DELETE',
     }
-    const response = await fetch(url, options)
-    const data = await response.json()
+    await fetch(url, options)
   }
 
   return (
-    <li className="cart-item">
-      <h1>Cart</h1>
-      <div className="cart-item-details">
-        <img className="cart-img" src={file} alt={title} />
-        <div className="cart-content">
-          <h1>{title}</h1>
-          <p>Description: {description}</p>
-          <div className="cart-bottom">
+    <li className="own-book-list-item">
+      <div className="own-book-item">
+        <img className="own-book-image" src={file} alt={title} />
+        <div className="own-book-content">
+          <h1 className="own-product-title">{title}</h1>
+          <p className="own-product-desc">Description: {description}</p>
+          <div className="view-btn-price">
             <button
               onClick={removeCartItem}
               className="cart-remove-btn"

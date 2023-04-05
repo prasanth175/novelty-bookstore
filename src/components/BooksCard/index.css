@@ -24,3 +24,21 @@
 .books-title {
   font-size: 13px;
 }
+
+@media (max-width: 900px) {
+  .books-item {
+    margin-right: 0px;
+  }
+}
+
+@media (max-width: 450px) {
+  .books-item {
+    width: 220px;
+    height: 280px;
+  }
+
+  .books-img {
+    height: 150px;
+    width: 100px;
+  }
+}

@@ -6,7 +6,7 @@ import './index.css'
 import Header from '../Header'
 import BooksCard from '../BooksCard'
 import CategoryCard from '../CategoryCard'
-import About from '../About'
+import CategoryDropDown from '../CategoryDropDown'
 
 const categoriesList = [
   {
@@ -59,10 +59,7 @@ class BooksList extends Component {
   getBooksDetails = async () => {
     this.setState({status: statusCheck.loading})
     const {searchInput, categoryId} = this.state
-    console.log(categoryId)
     const getToken = Cookies.get('jwt_token')
-    console.log(getToken)
-    console.log(searchInput)
     const booksUrl = `http://localhost:3006/books/?search_by=${searchInput}&category=${categoryId}`
     const options = {
       headers: {
@@ -81,6 +78,10 @@ class BooksList extends Component {
     }
   }
 
+  onOptionItem = event => {
+    this.getCategoryId(event.target.value)
+  }
+
   getCategoryId = id => this.setState({categoryId: id}, this.getBooksDetails)
 
   componentDidMount = () => {
@@ -92,20 +93,22 @@ class BooksList extends Component {
     return (
       <>
         <h1 className="search-heading">SEARCH THE BOOK YOU WANT</h1>
-        <input
-          className="books-search-input"
-          type="search"
-          value={searchInput}
-          onChange={this.onSearch}
-          placeholder="Search here..."
-        />
-        <button
-          onClick={this.clearFilters}
-          className="clear-filters-btn"
-          type="button"
-        >
-          Clear Filters
-        </button>
+        <div className="search-bar">
+          <input
+            className="books-search-input"
+            type="search"
+            value={searchInput}
+            onChange={this.onSearch}
+            placeholder="Search here..."
+          />
+          <button
+            onClick={this.clearFilters}
+            className="clear-filters-btn"
+            type="button"
+          >
+            Clear Filters
+          </button>
+        </div>
       </>
     )
   }
@@ -115,7 +118,7 @@ class BooksList extends Component {
       <img
         src="https://cdn.dribbble.com/users/721524/screenshots/4117132/untitled-1-_1_.png"
         alt="not found"
-        className="not-found-img"
+        className="not-found-books"
       />
       <h1 className="empty-product-heading">No Product Available</h1>
     </div>
@@ -168,10 +171,21 @@ class BooksList extends Component {
                   <CategoryCard
                     item={each}
                     getCategoryId={this.getCategoryId}
+                    key={each.category}
                   />
                 ))}
               </ul>
             </div>
+
+            <select className="category-drop-down" onChange={this.onOptionItem}>
+              {categoriesList.map(each => (
+                <CategoryDropDown
+                  item={each}
+                  getCategoryId={this.getCategoryId}
+                  key={each.category}
+                />
+              ))}
+            </select>
             <div className="all-products-section">{this.renderAllViews()}</div>
           </div>
         </div>

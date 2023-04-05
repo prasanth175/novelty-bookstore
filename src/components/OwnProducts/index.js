@@ -32,7 +32,6 @@ class OwnProducts extends Component {
     }
     const response = await fetch(bookUrl, options)
     const data = await response.json()
-    console.log(data.dbResponse)
     if (response.ok === true) {
       if (data.dbResponse.length > 0) {
         const updatedList = data.dbResponse.map(each => ({
@@ -72,7 +71,7 @@ class OwnProducts extends Component {
   renderBooks = () => {
     const {booksList} = this.state
     return (
-      <div>
+      <div className="own-products-box">
         <h1 className="own-products-heading">Your Products</h1>
         <ul className="own-products-list">
           {booksList.map(each => (
@@ -103,7 +102,6 @@ class OwnProducts extends Component {
   }
 
   render() {
-    console.log('ownProducts')
     return (
       <>
         <Header />

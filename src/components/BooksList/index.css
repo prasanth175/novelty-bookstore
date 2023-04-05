@@ -2,21 +2,34 @@
   background-color: rgba(232, 236, 235, 0.677);
   height: 80px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+}
+
+.not-found-books {
+  width: 600px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 60%;
+  margin-left: 20px;
 }
 
 .search-heading {
   margin-top: 7px;
   color: rgb(92, 168, 222);
   font-family: 'Courier New';
+  text-align: center;
 }
 
 .books-search-input {
-  width: 30%;
+  width: 60%;
   padding: 10px;
   border-width: 0px;
   border-radius: 3px;
+  margin-right: 20px;
 }
 
 .books-search-input:focus {
@@ -92,4 +105,85 @@
   border-radius: 5px;
   font-weight: 450;
   font-family: 'Roboto';
+}
+
+.category-drop-down {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .books-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    padding-bottom: 20px;
+    justify-content: center;
+  }
+
+  .search-bar {
+    justify-content: center;
+  }
+
+  .clear-filters-btn {
+    font-size: 50%;
+  }
+
+  .not-found-books {
+    width: 80%;
+  }
+}
+
+@media (max-width: 650px) {
+  .empty-product-heading {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .category-section {
+    display: none;
+  }
+
+  .books-empty-container {
+    height: 60vh;
+  }
+
+  .books-categories-container {
+    flex-direction: column;
+  }
+
+  .category-drop-down {
+    display: block;
+    align-self: flex-end;
+    font-size: 20px;
+    font-family: 'Roboto';
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: transparent;
+    border-width: 0px;
+    margin-right: 20px;
+    cursor: pointer;
+    box-shadow: 4px 8px 16px 0px rgb(218, 245, 218);
+    margin-top: 20px;
+  }
+
+  .category-drop-down:focus {
+    outline: none;
+  }
+
+  .all-products-section {
+    align-self: center;
+  }
+
+  .books-item {
+    margin-right: 0px;
+  }
+}
+
+@media (max-width: 300px) {
+  .empty-product-heading {
+    font-size: 20px;
+  }
 }

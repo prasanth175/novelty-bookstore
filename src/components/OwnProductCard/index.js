@@ -3,20 +3,7 @@ import './index.css'
 
 const OwnProductCard = props => {
   const {item} = props
-  const {
-    author,
-    category,
-    description,
-    isbn,
-    language,
-    printedPrice,
-    publicationYear,
-    sellingPrice,
-    title,
-    userId,
-    bookId,
-    file,
-  } = item
+  const {description, sellingPrice, title, bookId, file} = item
   return (
     <li className="own-book-list-item">
       <div className="own-book-item">

@@ -1,10 +1,8 @@
 import {Component} from 'react'
 import {AiFillLinkedin, AiFillInstagram} from 'react-icons/ai'
-
 import Cookies from 'js-cookie'
 import './index.css'
 import Header from '../Header'
-import RelatedItem from '../RelatedItem'
 
 class BookDetails extends Component {
   state = {
@@ -12,7 +10,6 @@ class BookDetails extends Component {
     bidAmount: '',
     mobileNumber: '',
     isSubmitted: false,
-    relatedList: [],
   }
 
   onMobileNumber = event => this.setState({mobileNumber: event.target.value})
@@ -23,7 +20,6 @@ class BookDetails extends Component {
     const {match} = this.props
     const {params} = match
     const {id} = params
-
     const bookDetailsUrl = `http://localhost:3006/books/${id}`
     const response = await fetch(bookDetailsUrl)
     const data = await response.json()
@@ -62,46 +58,12 @@ class BookDetails extends Component {
     const resp = await fetch(url, options)
     const data = await resp.json()
     if (data.response !== undefined) {
-      this.setState(
-        {bidAmount: data.response.bidAmount, isSubmitted: true},
-        this.getRelatedBookDetails,
-      )
-    } else {
-      console.log('empty result')
-    }
-  }
-
-  getRelatedBookDetails = async () => {
-    const {bookDetails} = this.state
-    const {category} = bookDetails
-
-    const relatedUrl = 'http://localhost:3006/related-books'
-    const options = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      mode: 'cors',
-      body: JSON.stringify({category}),
-    }
-
-    const resp = await fetch(relatedUrl, options)
-    const data = await resp.json()
-    console.log(data.dbRes.length)
-    if (data.dbRes.length > 0) {
-      const updatedList = data.dbRes.map(each => ({
-        title: each.title,
-        file: each.file,
-        sellingPrice: each.selling_price,
-        bookId: each.bookId,
-      }))
-      this.setState({relatedList: updatedList})
+      this.setState({bidAmount: data.response.bidAmount, isSubmitted: true})
     }
   }
 
   componentDidMount = async () => {
     this.getBookDetails()
-    this.getRelatedBookDetails()
   }
 
   editBidForm = () => this.setState({isSubmitted: false})
@@ -111,7 +73,6 @@ class BookDetails extends Component {
     const getToken = Cookies.get('jwt_token')
     const {bidAmount, mobileNumber, bookDetails} = this.state
     const {bookId, file, description, title} = bookDetails
-
     const bidDetails = {
       bookId,
       bidAmount,
@@ -120,7 +81,6 @@ class BookDetails extends Component {
       description,
       title,
     }
-
     const bidUrl = 'http://localhost:3006/biddetails'
     const options = {
       headers: {
@@ -132,8 +92,7 @@ class BookDetails extends Component {
       body: JSON.stringify(bidDetails),
     }
 
-    const response = await fetch(bidUrl, options)
-    const data = await response.json()
+    await fetch(bidUrl, options)
     this.setState({isSubmitted: true})
   }
 
@@ -143,7 +102,7 @@ class BookDetails extends Component {
     return (
       <form className="details-bidding-form" onSubmit={this.submitBidForm}>
         <label className="details-bidding-label" htmlFor="bidAmount">
-          Enter Bid Amount:
+          Enter Bargain Amount:
         </label>
         <input
           className="details-bidding-input"
@@ -177,17 +136,16 @@ class BookDetails extends Component {
 
   bidSubmissionMsg = () => {
     const {bidAmount} = this.state
-
     return (
       <div className="submitted-bid-form">
-        <h1>Amount Submitted by you</h1>
+        <h1 className="bid-msg-txt">Amount Submitted by you</h1>
         <h1>{bidAmount}</h1>
         <button
           className="edit-bid-btn"
           type="button"
           onClick={this.editBidForm}
         >
-          Edit Bid Value
+          Edit Bargain Value
         </button>
       </div>
     )
@@ -199,7 +157,6 @@ class BookDetails extends Component {
       author,
       category,
       description,
-      isbn,
       language,
       printedPrice,
       publicationYear,
@@ -207,7 +164,6 @@ class BookDetails extends Component {
       title,
       userId,
       file,
-      bookId,
     } = bookDetails
 
     return (
@@ -263,7 +219,7 @@ class BookDetails extends Component {
           </div>
 
           <div className="details-bidding-container">
-            <h1 className="details-bidding-heading">Bidding Price</h1>
+            <h1 className="details-bidding-heading">Bargain Price</h1>
             {isSubmitted ? this.bidSubmissionMsg() : this.renderBidForm()}
           </div>
         </div>
@@ -272,24 +228,10 @@ class BookDetails extends Component {
   }
 
   render() {
-    const {relatedList} = this.state
-    console.log(relatedList.length)
     return (
       <>
         <Header />
         <div className="book-details">{this.renderBookDetails()}</div>
-
-        {relatedList.length > 0 && (
-          <div className="related-products">
-            <h1 className="related-heading">Related Products</h1>
-            <ul className="related-container">
-              {relatedList.map(each => (
-                <RelatedItem item={each} key={each.bookId} />
-              ))}
-            </ul>
-          </div>
-        )}
-
         <div>
           <div className="about-us-main-container">
             <div className="about-us-container">
