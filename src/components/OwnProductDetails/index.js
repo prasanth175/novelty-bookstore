@@ -19,6 +19,7 @@ class OwnProductDetails extends Component {
     const bookDetailsUrl = `http://localhost:3006/products/${id}`
     const response = await fetch(bookDetailsUrl)
     const data = await response.json()
+
     const updatedData = {
       author: data.dbRes.author,
       category: data.dbRes.category,
@@ -54,7 +55,7 @@ class OwnProductDetails extends Component {
     }
     const bidResponse = await fetch(bidDetailsUrl, options)
     const bidData = await bidResponse.json()
-    this.setState({bidList: bidData.dbRes, isLoading: false})
+    this.setState({bidList: bidData.rows, isLoading: false})
   }
 
   onDeleteOwnBook = async () => {

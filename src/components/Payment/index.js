@@ -20,10 +20,10 @@ class Payment extends Component {
     const data = await response.json()
     this.setState(
       {
-        imageUrl: data.dbRes.file,
-        price: data.dbRes.selling_price,
-        total: parseInt(data.dbRes.selling_price) + 10,
-        username: data.dbRes.userId,
+        imageUrl: data.rows[0].file,
+        price: data.rows[0].selling_price,
+        total: parseInt(data.rows[0].selling_price) + 10,
+        username: data.rows[0].userId,
       },
       this.getUserMail,
     )
@@ -65,9 +65,11 @@ class Payment extends Component {
 
   handlePayment = async () => {
     const {username, email} = this.state
+    console.log(username)
+    console.log(email)
     const order = await this.createOrder()
     const options = {
-      key: 'rzp_test_SUCPQkxTXgHfQb',
+      key: 'rzp_test_YpJuwcUUcAfw87',
       amount: order.amount,
       currency: order.currency,
       name: 'Prasanth Kumar Kodamanchili',

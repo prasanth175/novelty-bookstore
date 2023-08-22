@@ -30,8 +30,8 @@ class Cart extends Component {
     const response = await fetch(url, options)
     const data = await response.json()
     if (response.ok === true) {
-      if (data.response.length > 0) {
-        this.setState({cartList: data.response, status: statusCheck.success})
+      if (data.rows.length > 0) {
+        this.setState({cartList: data.rows, status: statusCheck.success})
       } else {
         this.setState({status: statusCheck.failure})
       }

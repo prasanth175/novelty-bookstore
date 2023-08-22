@@ -49,7 +49,7 @@ class Header extends Component {
     }
     const response = await fetch(url, options)
     const data = await response.json()
-    this.setState({cartItemCount: data.response.length})
+    this.setState({cartItemCount: data.rows.length})
   }
 
   componentDidMount = () => {

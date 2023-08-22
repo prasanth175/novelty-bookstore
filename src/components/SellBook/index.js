@@ -63,7 +63,7 @@ class SellBook extends Component {
     isbn: '',
     printedPrice: '',
     sellingPrice: '',
-    file: null,
+    image: null,
     fieldsErrorStatus: false,
     fieldsErrorTxt: '',
     showMsgStatus: false,
@@ -91,13 +91,17 @@ class SellBook extends Component {
 
   onSellingPrice = event => this.setState({sellingPrice: event.target.value})
 
-  onFile = event => {
-    const file = event.target.files[0]
-    const reader = new FileReader()
-    reader.onload = () => {
-      this.setState({file: reader.result})
-    }
-    reader.readAsDataURL(file)
+  //   onFile = event => {
+  //     const file = event.target.files[0]
+  //     const reader = new FileReader()
+  //     reader.onload = () => {
+  //       this.setState({file: reader.result})
+  //     }
+  //     reader.readAsDataURL(file)
+  //   }
+
+  onFile = e => {
+    this.setState({image: e.target.files[0]})
   }
 
   submitSellForm = event => {
@@ -110,7 +114,7 @@ class SellBook extends Component {
       isbn,
       printedPrice,
       sellingPrice,
-      file,
+      image,
     } = this.state
     if (
       title === '' ||
@@ -120,7 +124,7 @@ class SellBook extends Component {
       isbn === '' ||
       printedPrice === '' ||
       sellingPrice === '' ||
-      file === ''
+      image === ''
     ) {
       this.setState({
         fieldsErrorStatus: true,
@@ -129,6 +133,7 @@ class SellBook extends Component {
     } else {
       this.setState({fieldsErrorStatus: false}, this.sendSellBookDetails)
     }
+    // this.setState({fieldsErrorStatus: false}, this.sendSellBookDetails)
   }
 
   sendSellBookDetails = async () => {
@@ -142,8 +147,12 @@ class SellBook extends Component {
       isbn,
       printedPrice,
       sellingPrice,
-      file,
+      image,
     } = this.state
+    const formData = new FormData()
+    formData.append('image', image)
+    console.log(image)
+    console.log(formData)
     const bookId = uuidv4()
     const getToken = Cookies.get('jwt_token')
     const sellDetails = {
@@ -156,18 +165,19 @@ class SellBook extends Component {
       isbn,
       printed_price: printedPrice,
       selling_price: sellingPrice,
-      file,
+      image,
       bookId,
     }
+    formData.append('sellDetails', JSON.stringify(sellDetails))
     const sellUrl = 'http://localhost:3006/sell/'
     const options = {
       headers: {
-        'Content-Type': 'application/json',
+        // 'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${getToken}`,
       },
       method: 'POST',
       mode: 'cors',
-      body: JSON.stringify(sellDetails),
+      body: formData,
     }
     const response = await fetch(sellUrl, options)
     const data = await response.json()

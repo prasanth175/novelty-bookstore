@@ -23,6 +23,7 @@ class BookDetails extends Component {
     const bookDetailsUrl = `http://localhost:3006/books/${id}`
     const response = await fetch(bookDetailsUrl)
     const data = await response.json()
+    console.log(data.rows)
     const updatedData = {
       author: data.dbRes.author,
       category: data.dbRes.category,
@@ -37,6 +38,7 @@ class BookDetails extends Component {
       file: data.dbRes.file,
       bookId: data.dbRes.bookId,
     }
+    console.log(updatedData)
     this.setState({bookDetails: updatedData}, this.getBiddingDetails)
   }
 
@@ -72,15 +74,16 @@ class BookDetails extends Component {
     event.preventDefault()
     const getToken = Cookies.get('jwt_token')
     const {bidAmount, mobileNumber, bookDetails} = this.state
-    const {bookId, file, description, title} = bookDetails
+    console.log(bidAmount)
+    const {bookId, description, title} = bookDetails
     const bidDetails = {
       bookId,
       bidAmount,
       mobile: mobileNumber,
-      file,
       description,
       title,
     }
+    console.log(bidDetails)
     const bidUrl = 'http://localhost:3006/biddetails'
     const options = {
       headers: {
@@ -88,7 +91,6 @@ class BookDetails extends Component {
         Authorization: `Bearer ${getToken}`,
       },
       method: 'POST',
-      mode: 'cors',
       body: JSON.stringify(bidDetails),
     }
 
@@ -168,7 +170,11 @@ class BookDetails extends Component {
 
     return (
       <div className="book-details-container main-section">
-        <img src={file} alt={title} className="book-details-image" />
+        <img
+          src={`http://localhost:3006/uploads/${file}`}
+          alt={title}
+          className="book-details-image"
+        />
         <div className="book-details-content">
           <div>
             <h1 className="book-details-heading">{title}</h1>

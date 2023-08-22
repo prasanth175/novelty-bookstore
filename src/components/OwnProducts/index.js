@@ -33,8 +33,8 @@ class OwnProducts extends Component {
     const response = await fetch(bookUrl, options)
     const data = await response.json()
     if (response.ok === true) {
-      if (data.dbResponse.length > 0) {
-        const updatedList = data.dbResponse.map(each => ({
+      if (data.rows.length > 0) {
+        const updatedList = data.rows.map(each => ({
           author: each.author,
           category: each.category,
           description: each.description,

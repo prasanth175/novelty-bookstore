@@ -71,8 +71,8 @@ class BooksList extends Component {
     }
     const response = await fetch(booksUrl, options)
     const data = await response.json()
-    if (data.dbRes.length > 0) {
-      this.setState({booksList: data.dbRes, status: statusCheck.success})
+    if (data.rows.length > 0) {
+      this.setState({booksList: data.rows, status: statusCheck.success})
     } else {
       this.setState({status: statusCheck.failure})
     }

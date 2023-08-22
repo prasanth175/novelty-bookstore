@@ -27,6 +27,7 @@ class LoginForm extends Component {
 
   onSuccessApi = token => {
     const {history} = this.props
+    console.log(token)
     Cookies.set('jwt_token', token, {expires: 1})
     history.replace('/')
   }
@@ -45,10 +46,11 @@ class LoginForm extends Component {
     }
     const response = await fetch(loginUrl, options)
     const data = await response.json()
-    if (data.status_code === 400) {
-      this.setState({errorMsg: data.error_msg, isError: true})
-    } else {
+    console.log(data)
+    if (data.status_code === 200) {
       this.onSuccessApi(data.jwtToken)
+    } else {
+      this.setState({errorMsg: data.error_msg, isError: true})
     }
   }
 
